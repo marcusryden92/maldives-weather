@@ -6,7 +6,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 export const newsItems = [
   {
@@ -92,13 +92,13 @@ export const NewsSection = ({
         </h2>
         {showViewAll && (
           <Button variant="outline" asChild>
-            <Link to="/news">View All News</Link>
+            <Link href="/news">View All News</Link>
           </Button>
         )}
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {displayedNews.map((news) => (
-          <Link to={`/news/${news.id}`} key={news.id}>
+          <Link href={`/news/${news.id}`} key={news.id}>
             <Card
               className={`overflow-hidden transition-all duration-300 hover:shadow-lg ${
                 news.type === "good"

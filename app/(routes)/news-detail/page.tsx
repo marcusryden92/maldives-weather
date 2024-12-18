@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { newsItems } from "@/components/NewsSection";
 import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 
 const NewsDetail = () => {
@@ -17,7 +17,7 @@ const NewsDetail = () => {
           <div className="container mx-auto">
             <h1 className="text-3xl font-bold text-accent">News not found</h1>
             <Button asChild className="mt-4">
-              <Link to="/news">
+              <Link href="/news">
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Back to News
               </Link>
@@ -34,7 +34,7 @@ const NewsDetail = () => {
       <div className="min-h-screen bg-gradient-to-br from-accent/20 via-primary/20 to-accent/20">
         <div className="container mx-auto px-4 py-24">
           <Button variant="outline" asChild className="mb-8">
-            <Link to="/news">
+            <Link href="/news">
               <ArrowLeft className="mr-2 h-4 w-4" />
               Back to News
             </Link>
