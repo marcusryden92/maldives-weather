@@ -1,7 +1,12 @@
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { Sun, CloudRain, Cloud, CloudSun } from "lucide-react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { useState } from "react";
 import { HourlyWeather } from "./HourlyWeather";
 
@@ -28,16 +33,16 @@ const getWeatherIcon = (condition: string) => {
 };
 
 const backgroundImages = [
-  '/lovable-uploads/9dc13eb9-785c-45ba-a036-a3bcb96e4bf8.png',
-  '/lovable-uploads/bf50f110-02fd-4b05-bb49-2b502489c51c.png',
-  '/lovable-uploads/bd82af9e-512c-48bb-8026-88c52b1a7efd.png',
-  '/lovable-uploads/ef22733b-3bb3-48c0-b62e-eec4023cdbbc.png',
-  '/lovable-uploads/cffc9971-9a50-40ed-8955-c4e4243fce4e.png',
-  '/lovable-uploads/1b0338be-72df-4827-acd1-367da387ea25.png',
-  '/lovable-uploads/ca97d0a7-3347-4649-a7f3-db9d0ba1fe62.png',
-  '/lovable-uploads/03ba4976-a3ea-4414-b126-f4ec5e1f4b81.png',
-  '/lovable-uploads/741e24fe-e665-4e68-90fd-f197a4b36577.png',
-  '/lovable-uploads/d958e7d2-d44c-4560-9ae3-79cba767b336.png'
+  "/lovable-uploads/9dc13eb9-785c-45ba-a036-a3bcb96e4bf8.png",
+  "/lovable-uploads/bf50f110-02fd-4b05-bb49-2b502489c51c.png",
+  "/lovable-uploads/bd82af9e-512c-48bb-8026-88c52b1a7efd.png",
+  "/lovable-uploads/ef22733b-3bb3-48c0-b62e-eec4023cdbbc.png",
+  "/lovable-uploads/cffc9971-9a50-40ed-8955-c4e4243fce4e.png",
+  "/lovable-uploads/1b0338be-72df-4827-acd1-367da387ea25.png",
+  "/lovable-uploads/ca97d0a7-3347-4649-a7f3-db9d0ba1fe62.png",
+  "/lovable-uploads/03ba4976-a3ea-4414-b126-f4ec5e1f4b81.png",
+  "/lovable-uploads/741e24fe-e665-4e68-90fd-f197a4b36577.png",
+  "/lovable-uploads/d958e7d2-d44c-4560-9ae3-79cba767b336.png",
 ];
 
 export const WeatherCard = ({
@@ -49,19 +54,19 @@ export const WeatherCard = ({
 }: WeatherCardProps) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const isToday = day.toLowerCase() === "today";
-  const imageIndex = isToday ? 0 : index % (backgroundImages.length - 1) + 1;
-  
+  const imageIndex = isToday ? 0 : (index % (backgroundImages.length - 1)) + 1;
+
   return (
     <>
-      <Card 
+      <Card
         className={cn(
           "p-8 border-none shadow-lg hover:shadow-xl transition-all duration-300 animate-fade-up overflow-hidden group relative text-white cursor-pointer",
           className
         )}
         style={{
           backgroundImage: `url('${backgroundImages[imageIndex]}')`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
+          backgroundSize: "cover",
+          backgroundPosition: "center",
         }}
         onClick={() => setIsDialogOpen(true)}
       >
@@ -79,9 +84,11 @@ export const WeatherCard = ({
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle className="text-2xl font-bold">{day}'s Hourly Forecast</DialogTitle>
+            <DialogTitle className="text-2xl font-bold">
+              {day}'s Hourly Forecast
+            </DialogTitle>
           </DialogHeader>
-          <HourlyWeather 
+          <HourlyWeather
             day={day}
             backgroundImage={backgroundImages[imageIndex]}
             condition={condition}

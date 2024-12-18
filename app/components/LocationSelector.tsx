@@ -26,8 +26,8 @@ export const LocationSelector = ({
         </SelectTrigger>
         <SelectContent className="bg-white/95 backdrop-blur-md border-white/20">
           {locations.map((location) => (
-            <SelectItem 
-              key={location.id} 
+            <SelectItem
+              key={location.id}
               value={location.id}
               className="text-gray-800 hover:bg-accent/20 focus:bg-accent/20"
             >
