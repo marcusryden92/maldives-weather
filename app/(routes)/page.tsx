@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { WeatherCard } from "@/components/WeatherCard";
 import { WeatherMetrics } from "@/components/WeatherMetrics";
