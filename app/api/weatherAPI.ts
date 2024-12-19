@@ -12,7 +12,7 @@ export class WeatherAPIError extends Error {
   }
 }
 
-export default async function fetch14DayForecast(
+export default async function fetchTwoWeekForecast(
   location: LocationType
 ): Promise<WeatherDataObject | null> {
   let coordinates = { latitude: 0, longitude: 0 };

@@ -17,7 +17,7 @@ import { NewsSection } from "@/components/NewsSection";
 import { ActivitiesSection } from "@/components/ActivitiesSection";
 import { RecommendedResorts } from "@/components/RecommendedResorts";
 
-import fetch14DayForecastAction from "@/actions/fetchWeather";
+import fetchTwoWeekForecastAction from "@/actions/fetchTwoWeekForecast";
 
 import { WeatherCardSkeleton } from "@/components/WeatherCardSkeleton";
 
@@ -117,7 +117,7 @@ const Index = () => {
 
   useEffect(() => {
     async function getWeather() {
-      const data = await fetch14DayForecastAction(selectedLocation);
+      const data = await fetchTwoWeekForecastAction(selectedLocation);
       if (data) {
         setWeatherDataObject(data);
       }
