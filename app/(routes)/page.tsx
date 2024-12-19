@@ -182,14 +182,13 @@ const Index = () => {
             {/* Weather Card */}
             <div className="flex justify-center px-4">
               <div className="w-full max-w-4xl">
-                {weatherData && (
+                {weatherData && weatherData.length > 0 && (
                   <WeatherCard
                     day="Today"
                     temperature={weatherData[0].temperatureMax}
-                    condition={weatherData[0].weatherCode}
-                    icon={weatherData[0].weatherIcon}
+                    weatherCode={weatherData[0].weatherCode}
                     className="transform hover:scale-105 transition-all duration-300"
-                    index={0}
+                    index={1}
                   />
                 )}
               </div>
@@ -222,17 +221,19 @@ const Index = () => {
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-7xl mx-auto">
                 {visibleForecast &&
-                  visibleForecast.map((day: any, index: number) => (
-                    <WeatherCard
-                      key={index}
-                      day={index === 0 ? "Today" : day.weekday}
-                      temperature={day.temperatureMax}
-                      condition={day.weatherCode}
-                      icon={day.weatherIcon}
-                      className="transform hover:scale-105 transition-all duration-300"
-                      index={index + 1}
-                    />
-                  ))}
+                  visibleForecast.map((day: any, index: number) => {
+                    console.log(day);
+                    return (
+                      <WeatherCard
+                        key={index}
+                        day={index === 0 ? "Today" : day.weekday}
+                        temperature={day.temperatureMax}
+                        weatherCode={day.weatherCode}
+                        className="transform hover:scale-105 transition-all duration-300"
+                        index={index + 1}
+                      />
+                    );
+                  })}
               </div>
             </div>
 

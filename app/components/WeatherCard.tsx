@@ -2,7 +2,6 @@
 
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { Sun, CloudRain, Cloud, CloudSun } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -12,11 +11,14 @@ import {
 import { useState } from "react";
 import { HourlyWeather } from "./HourlyWeather";
 
+import weatherIcons from "@/lib/weather-icons";
+
+import Image from "next/image";
+
 interface WeatherCardProps {
   day: string;
   temperature: string;
-  condition: string;
-  icon: string;
+  weatherCode: number;
   className?: string;
   index: number;
 }
@@ -34,16 +36,25 @@ const backgroundImages = [
   "/lovable-uploads/d958e7d2-d44c-4560-9ae3-79cba767b336.png",
 ];
 
+function getWeatherCode(weatherCode: number) {
+  return weatherIcons.find((c) => {
+    if (c.code === weatherCode) {
+      return c;
+    }
+  });
+}
+
 export const WeatherCard = ({
   day,
   temperature,
-  condition,
-  icon,
+  weatherCode,
   className,
   index,
 }: WeatherCardProps) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const imageIndex = (index % (backgroundImages.length - 1)) + 1;
+
+  const [codeData, setCodeData] = useState(getWeatherCode(weatherCode)) || "";
 
   return (
     <>
@@ -63,10 +74,19 @@ export const WeatherCard = ({
         <div className="relative z-10 flex flex-col items-center space-y-6">
           <span className="text-lg font-medium">{day}</span>
           <div className="rounded-full p-4 bg-white/20 group-hover:scale-110 transition-transform duration-300">
-            <img src={icon} />{" "}
+            <Image
+              src={`/weather-icons/${codeData?.icon_day}`}
+              alt={codeData?.description || "Weather icon"}
+              width={80}
+              height={80}
+              priority={true}
+              style={{ filter: "invert(1)" }} // Inverts color to white
+            />
           </div>
-          <span className="text-4xl font-bold ml-4">{temperature}&deg;</span>
-          <span className="text-lg text-white/90">{condition}</span>
+          <span className="text-4xl font-bold">{temperature}&deg;C</span>
+          <span className="text-lg text-white/90 text-center">
+            {codeData?.description}
+          </span>
         </div>
       </Card>
 
@@ -80,7 +100,7 @@ export const WeatherCard = ({
           <HourlyWeather
             day={day}
             backgroundImage={backgroundImages[imageIndex]}
-            condition={condition}
+            weatherCode={codeData?.description || ""}
             temperature={temperature}
           />
         </DialogContent>

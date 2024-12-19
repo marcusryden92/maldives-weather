@@ -1,5 +1,4 @@
 import { fetchWeatherApi } from "openmeteo";
-import { weatherIcons } from "@/lib/weather-icons";
 
 export default async function fetch14DayForecast() {
   const params = {
@@ -57,17 +56,12 @@ export default async function fetch14DayForecast() {
 
   // `weatherData` now contains a simple structure with arrays for datetime and weather data
   for (let i = 0; i < weatherData.daily.time.length; i++) {
-    const item = weatherIcons.find((j) => {
-      if (j.code === weatherData.daily.weatherCode[i]) return j;
-    });
-
     const day = {
       time: weatherData.daily.time[i].toISOString(),
       weekday: weatherData.daily.time[i].toLocaleDateString("en-US", {
         weekday: "long",
       }),
-      weatherCode: item && item.day.description ? item.day.description : "",
-      weatherIcon: item && item.day.image ? item.day.image : "",
+      weatherCode: weatherData.daily.weatherCode[i],
       temperatureMax: weatherData.daily.temperature2mMax[i].toFixed(0),
       temperatureMin: weatherData.daily.temperature2mMin[i],
       uvIndex: weatherData.daily.uvIndexMax[i],
