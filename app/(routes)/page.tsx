@@ -19,17 +19,12 @@ import { RecommendedResorts } from "@/components/RecommendedResorts";
 
 import fetch14DayForecastAction from "@/actions/fetchWeather";
 
-import { Suspense } from "react";
-
-import {
-  WeatherCardSkeleton,
-  WeatherCardSkeletonList,
-} from "@/components/WeatherCardSkeleton";
+import { WeatherCardSkeleton } from "@/components/WeatherCardSkeleton";
 
 // Types
-import { WeatherDataArray, WeatherData } from "@/lib/weatherData";
+import { WeatherDataObject, WeatherDataArray } from "@/lib/weatherData";
 
-/* const weatherData = {
+/* const weatherDataObject = {
   current: {
     temperature: "29°C",
     condition: "Partly Cloudy",
@@ -81,12 +76,6 @@ import { WeatherDataArray, WeatherData } from "@/lib/weatherData";
   ],
 }; */
 
-const metrics = [
-  { label: "Humidity", value: "75%", icon: "droplets" },
-  { label: "Wind Speed", value: "12 km/h", icon: "wind" },
-  { label: "UV Index", value: "High", icon: "sun" },
-];
-
 const months = [
   "January",
   "February",
@@ -109,15 +98,22 @@ const Index = () => {
   );
   const [forecastDays, setForecastDays] = useState("5");
 
-  const [weatherData, setWeatherData] = useState<WeatherDataArray | null>();
+  const [weatherDataObject, setWeatherDataObject] =
+    useState<WeatherDataObject | null>(null);
   const [visibleForecast, setVisibleForecast] =
-    useState<WeatherDataArray | null>();
+    useState<WeatherDataArray | null>(null);
+
+  const [metrics, setMetrics] = useState([
+    { label: "Humidity", value: "-", icon: "droplets" },
+    { label: "Wind Speed", value: "- km/h", icon: "wind" },
+    { label: "UV Index", value: "-", icon: "sun" },
+  ]);
 
   useEffect(() => {
     async function getWeather() {
       const data = await fetch14DayForecastAction();
       if (data) {
-        setWeatherData(data);
+        setWeatherDataObject(data);
       }
 
       console.log(data);
@@ -127,14 +123,38 @@ const Index = () => {
   }, [selectedLocation]);
 
   useEffect(() => {
-    if (weatherData && forecastDays) {
-      const data = weatherData.slice(0, parseInt(forecastDays));
+    if (weatherDataObject) {
+      const metricsData = [
+        {
+          label: "Humidity",
+          value: `${weatherDataObject.currentWeather.humidity.toString()}%`,
+          icon: "droplets",
+        },
+        {
+          label: "Wind Speed",
+          value: `${weatherDataObject.currentWeather.windSpeed.toString()} km/h`,
+          icon: "wind",
+        },
+        {
+          label: "UV Index",
+          value: weatherDataObject.currentWeather.uvIndex.toString(),
+          icon: "sun",
+        },
+      ];
+
+      setMetrics(metricsData);
+    }
+  }, [weatherDataObject]);
+
+  useEffect(() => {
+    if (weatherDataObject && weatherDataObject.forecast && forecastDays) {
+      const data = weatherDataObject.forecast.slice(0, parseInt(forecastDays));
 
       if (data) {
         setVisibleForecast(data);
       }
     }
-  }, [weatherData, forecastDays]);
+  }, [weatherDataObject, forecastDays]);
 
   return (
     <>
@@ -193,11 +213,11 @@ const Index = () => {
             {/* Weather Card */}
             <div className="flex justify-center px-4">
               <div className="w-full max-w-4xl">
-                {weatherData && weatherData.length > 0 ? (
+                {weatherDataObject && weatherDataObject.forecast.length > 0 ? (
                   <WeatherCard
                     day="Today"
-                    temperature={weatherData[0].temperatureMax}
-                    weatherCode={weatherData[0].weatherCode}
+                    temperature={weatherDataObject.forecast[0].temperatureMax}
+                    weatherCode={weatherDataObject.forecast[0].weatherCode}
                     className="transform hover:scale-105 transition-all duration-300"
                     index={1}
                   />

@@ -4,12 +4,12 @@ interface HourlyWeatherProps {
   day: string;
   backgroundImage: string;
   weatherCode: string;
-  temperature: string;
+  temperature: number;
 }
 
 // Generate mock hourly data based on the day's weatherCode and temperature
-const generateHourlyData = (weatherCode: string, temperature: string) => {
-  const baseTemp = parseInt(temperature);
+const generateHourlyData = (weatherCode: string, temperature: number) => {
+  const baseTemp = temperature;
   const hours = [];
 
   for (let i = 0; i < 24; i++) {

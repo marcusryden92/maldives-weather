@@ -20,8 +20,8 @@ const weatherIcons = [
   {
     code: 3,
     description: "Cloudy",
-    icon_day: "wi-day-cloudy-gusts.svg",
-    icon_night: "wi-night-cloudy-gusts.svg",
+    icon_day: "wi-cloud.svg",
+    icon_night: "wi-cloud.svg",
   },
   {
     code: 4,

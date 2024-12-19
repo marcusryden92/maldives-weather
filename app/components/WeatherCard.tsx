@@ -17,7 +17,7 @@ import Image from "next/image";
 
 interface WeatherCardProps {
   day: string;
-  temperature: string;
+  temperature: number;
   weatherCode: number;
   className?: string;
   index: number;
