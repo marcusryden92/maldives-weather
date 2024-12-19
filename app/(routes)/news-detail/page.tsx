@@ -1,3 +1,4 @@
+"use client";
 import { useParams } from "react-router-dom";
 import { newsItems } from "@/components/NewsSection";
 import Header from "@/components/Header";
