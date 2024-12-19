@@ -116,14 +116,14 @@ const Index = () => {
   }, [selectedLocation]);
 
   useEffect(() => {
-    if (weatherData) {
+    if (weatherData && forecastDays) {
       const data = weatherData.slice(0, parseInt(forecastDays));
 
       if (data) {
         setVisibleForecast(data);
       }
     }
-  }, [weatherData]);
+  }, [weatherData, forecastDays]);
 
   return (
     <>
