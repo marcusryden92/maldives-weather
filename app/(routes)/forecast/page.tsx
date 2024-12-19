@@ -1,8 +1,8 @@
-import { WeatherCard } from "@/components/WeatherCard";
+// import { WeatherCard } from "@/components/WeatherCard";
 import { WeatherMetrics } from "@/components/WeatherMetrics";
 import Header from "@/components/Header";
 
-const weatherData = {
+/* const weatherData = {
   current: {
     temperature: "29°C",
     condition: "Partly Cloudy",
@@ -39,7 +39,7 @@ const weatherData = {
       icon: "scattered-showers",
     },
   ],
-};
+}; */
 
 const metrics = [
   { label: "Humidity", value: "75%", icon: "droplets" },
