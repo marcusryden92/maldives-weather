@@ -25,3 +25,5 @@ export type WeatherDataObject = {
   currentWeather: CurrentWeatherData;
   forecast: WeatherDataArray;
 };
+
+export type LocationType = "male" | "addu" | "maafushi" | "fuvahmulah";

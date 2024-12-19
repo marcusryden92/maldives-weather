@@ -5,22 +5,30 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { LocationType } from "@/lib/weatherData";
+import { Dispatch, SetStateAction } from "react";
 
 const locations = [
   { id: "male", name: "Malé" },
   { id: "addu", name: "Addu City" },
   { id: "maafushi", name: "Maafushi" },
   { id: "fuvahmulah", name: "Fuvahmulah" },
-];
+] as const;
 
-export const LocationSelector = ({
+interface LocationSelectorProps {
+  onLocationChange: Dispatch<SetStateAction<LocationType>>;
+}
+
+export const LocationSelector: React.FC<LocationSelectorProps> = ({
   onLocationChange,
-}: {
-  onLocationChange: (location: string) => void;
 }) => {
+  const handleValueChange = (value: string) => {
+    onLocationChange(value as LocationType);
+  };
+
   return (
     <div className="w-full max-w-xs animate-fade-in">
-      <Select onValueChange={onLocationChange}>
+      <Select onValueChange={handleValueChange}>
         <SelectTrigger className="w-full backdrop-blur-sm bg-white/80 border-white/20 text-gray-800 font-medium">
           <SelectValue placeholder="Select location" />
         </SelectTrigger>
@@ -39,3 +47,5 @@ export const LocationSelector = ({
     </div>
   );
 };
+
+export type { LocationSelectorProps };

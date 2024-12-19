@@ -22,7 +22,11 @@ import fetch14DayForecastAction from "@/actions/fetchWeather";
 import { WeatherCardSkeleton } from "@/components/WeatherCardSkeleton";
 
 // Types
-import { WeatherDataObject, WeatherDataArray } from "@/lib/weatherData";
+import {
+  WeatherDataObject,
+  WeatherDataArray,
+  LocationType,
+} from "@/lib/weatherData";
 
 /* const weatherDataObject = {
   current: {
@@ -92,7 +96,8 @@ const months = [
 ];
 
 const Index = () => {
-  const [selectedLocation, setSelectedLocation] = useState("male");
+  const [selectedLocation, setSelectedLocation] =
+    useState<LocationType>("male");
   const [selectedMonth, setSelectedMonth] = useState(
     new Date().getMonth().toString()
   );
@@ -111,7 +116,7 @@ const Index = () => {
 
   useEffect(() => {
     async function getWeather() {
-      const data = await fetch14DayForecastAction();
+      const data = await fetch14DayForecastAction(selectedLocation);
       if (data) {
         setWeatherDataObject(data);
       }

@@ -1,5 +1,9 @@
 import { fetchWeatherApi } from "openmeteo";
-import { WeatherDataObject, WeatherDataArray } from "@/lib/weatherData";
+import {
+  WeatherDataObject,
+  WeatherDataArray,
+  LocationType,
+} from "@/lib/weatherData";
 
 export class WeatherAPIError extends Error {
   constructor(message: string, public readonly code?: string) {
@@ -8,11 +12,29 @@ export class WeatherAPIError extends Error {
   }
 }
 
-export default async function fetch14DayForecast(): Promise<WeatherDataObject | null> {
+export default async function fetch14DayForecast(
+  location: LocationType
+): Promise<WeatherDataObject | null> {
+  let coordinates = { latitude: 0, longitude: 0 };
+
+  switch (location) {
+    case "male":
+      coordinates = { latitude: 4.1752, longitude: 73.5092 };
+      break;
+    case "addu":
+      coordinates = { latitude: -0.6413, longitude: 73.158 };
+      break;
+    case "maafushi":
+      coordinates = { latitude: 3.9423, longitude: 73.4907 };
+      break;
+    case "fuvahmulah":
+      coordinates = { latitude: -0.2988, longitude: 73.424 };
+  }
+
   try {
     const params = {
-      latitude: [4.1752, -0.6413, 3.9423, -0.2988],
-      longitude: [73.5092, 73.158, 73.4907, 73.424],
+      latitude: coordinates.latitude,
+      longitude: coordinates.longitude,
       current: [
         "temperature_2m",
         "relative_humidity_2m",
