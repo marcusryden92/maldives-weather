@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { WeatherCard } from "@/components/WeatherCard";
 import { WeatherMetrics } from "@/components/WeatherMetrics";
 import { LocationSelector } from "@/components/LocationSelector";
@@ -17,7 +17,9 @@ import { NewsSection } from "@/components/NewsSection";
 import { ActivitiesSection } from "@/components/ActivitiesSection";
 import { RecommendedResorts } from "@/components/RecommendedResorts";
 
-const weatherData = {
+import fetchWeather14DaysAction from "@/actions/fetchWeather";
+
+/* const weatherData = {
   current: {
     temperature: "29°C",
     condition: "Partly Cloudy",
@@ -67,7 +69,7 @@ const weatherData = {
       icon: "partly-cloudy",
     },
   ],
-};
+}; */
 
 const metrics = [
   { label: "Humidity", value: "75%", icon: "droplets" },
@@ -97,7 +99,31 @@ const Index = () => {
   );
   const [forecastDays, setForecastDays] = useState("5");
 
-  const visibleForecast = weatherData.forecast.slice(0, parseInt(forecastDays));
+  const [weatherData, setWeatherData] = useState<any>();
+  const [visibleForecast, setVisibleForecast] = useState<any>();
+
+  useEffect(() => {
+    async function getWeather() {
+      const data = await fetchWeather14DaysAction();
+      if (data) {
+        setWeatherData(data);
+      }
+
+      console.log(data);
+    }
+
+    getWeather();
+  }, [selectedLocation]);
+
+  useEffect(() => {
+    if (weatherData) {
+      const data = weatherData.slice(0, parseInt(forecastDays));
+
+      if (data) {
+        setVisibleForecast(data);
+      }
+    }
+  }, [weatherData]);
 
   return (
     <>
@@ -156,14 +182,16 @@ const Index = () => {
             {/* Weather Card */}
             <div className="flex justify-center px-4">
               <div className="w-full max-w-4xl">
-                <WeatherCard
-                  day="Today"
-                  temperature={weatherData.current.temperature}
-                  condition={weatherData.current.condition}
-                  icon={weatherData.forecast[0].icon}
-                  className="transform hover:scale-105 transition-all duration-300"
-                  index={0}
-                />
+                {weatherData && (
+                  <WeatherCard
+                    day="Today"
+                    temperature={weatherData.temperatureMax}
+                    condition={weatherData.weatherCode}
+                    icon={weatherData[0].weatherIcon}
+                    className="transform hover:scale-105 transition-all duration-300"
+                    index={0}
+                  />
+                )}
               </div>
             </div>
 
@@ -193,17 +221,18 @@ const Index = () => {
                 </ToggleGroup>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-7xl mx-auto">
-                {visibleForecast.map((day, index) => (
-                  <WeatherCard
-                    key={index}
-                    day={day.day}
-                    temperature={day.temperature}
-                    condition={day.condition}
-                    icon={day.icon}
-                    className="transform hover:scale-105 transition-all duration-300"
-                    index={index + 1}
-                  />
-                ))}
+                {visibleForecast &&
+                  visibleForecast.map((day: any, index: number) => (
+                    <WeatherCard
+                      key={index}
+                      day={day.day}
+                      temperature={day.temperatureMax}
+                      condition={day.weatherCode}
+                      icon={day.weatherIcon}
+                      className="transform hover:scale-105 transition-all duration-300"
+                      index={index + 1}
+                    />
+                  ))}
               </div>
             </div>
 

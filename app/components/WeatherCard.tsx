@@ -21,19 +21,6 @@ interface WeatherCardProps {
   index: number;
 }
 
-const getWeatherIcon = (condition: string) => {
-  switch (condition.toLowerCase()) {
-    case "sunny":
-      return <Sun className="w-12 h-12 text-accent animate-pulse" />;
-    case "partly cloudy":
-      return <CloudSun className="w-12 h-12 text-accent" />;
-    case "scattered showers":
-      return <CloudRain className="w-12 h-12 text-accent" />;
-    default:
-      return <Cloud className="w-12 h-12 text-accent" />;
-  }
-};
-
 const backgroundImages = [
   "/lovable-uploads/9dc13eb9-785c-45ba-a036-a3bcb96e4bf8.png",
   "/lovable-uploads/bf50f110-02fd-4b05-bb49-2b502489c51c.png",
@@ -51,12 +38,12 @@ export const WeatherCard = ({
   day,
   temperature,
   condition,
+  icon,
   className,
   index,
 }: WeatherCardProps) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const isToday = day.toLowerCase() === "today";
-  const imageIndex = isToday ? 0 : (index % (backgroundImages.length - 1)) + 1;
+  const imageIndex = (index % (backgroundImages.length - 1)) + 1;
 
   return (
     <>
@@ -76,9 +63,9 @@ export const WeatherCard = ({
         <div className="relative z-10 flex flex-col items-center space-y-6">
           <span className="text-lg font-medium">{day}</span>
           <div className="rounded-full p-4 bg-white/20 group-hover:scale-110 transition-transform duration-300">
-            {getWeatherIcon(condition)}
+            <img src={icon} />{" "}
           </div>
-          <span className="text-4xl font-bold">{temperature}</span>
+          <span className="text-4xl font-bold ml-4">{temperature}&deg;</span>
           <span className="text-lg text-white/90">{condition}</span>
         </div>
       </Card>
