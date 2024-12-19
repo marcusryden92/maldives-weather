@@ -1,6 +1,8 @@
 import { fetchWeatherApi } from "openmeteo";
 
-export default async function fetch14DayForecast() {
+import { WeatherDataArray } from "@/lib/weatherData";
+
+export default async function fetch14DayForecast(): Promise<WeatherDataArray> {
   const params = {
     latitude: 4.1752,
     longitude: 73.5092,
@@ -52,7 +54,7 @@ export default async function fetch14DayForecast() {
     },
   };
 
-  let weatherArray = [];
+  let weatherArray: WeatherDataArray = [];
 
   // `weatherData` now contains a simple structure with arrays for datetime and weather data
   for (let i = 0; i < weatherData.daily.time.length; i++) {

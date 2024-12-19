@@ -19,6 +19,16 @@ import { RecommendedResorts } from "@/components/RecommendedResorts";
 
 import fetch14DayForecastAction from "@/actions/fetchWeather";
 
+import { Suspense } from "react";
+
+import {
+  WeatherCardSkeleton,
+  WeatherCardSkeletonList,
+} from "@/components/WeatherCardSkeleton";
+
+// Types
+import { WeatherDataArray, WeatherData } from "@/lib/weatherData";
+
 /* const weatherData = {
   current: {
     temperature: "29°C",
@@ -99,8 +109,9 @@ const Index = () => {
   );
   const [forecastDays, setForecastDays] = useState("5");
 
-  const [weatherData, setWeatherData] = useState<any>();
-  const [visibleForecast, setVisibleForecast] = useState<any>();
+  const [weatherData, setWeatherData] = useState<WeatherDataArray | null>();
+  const [visibleForecast, setVisibleForecast] =
+    useState<WeatherDataArray | null>();
 
   useEffect(() => {
     async function getWeather() {
@@ -182,7 +193,7 @@ const Index = () => {
             {/* Weather Card */}
             <div className="flex justify-center px-4">
               <div className="w-full max-w-4xl">
-                {weatherData && weatherData.length > 0 && (
+                {weatherData && weatherData.length > 0 ? (
                   <WeatherCard
                     day="Today"
                     temperature={weatherData[0].temperatureMax}
@@ -190,6 +201,8 @@ const Index = () => {
                     className="transform hover:scale-105 transition-all duration-300"
                     index={1}
                   />
+                ) : (
+                  <WeatherCardSkeleton />
                 )}
               </div>
             </div>
@@ -200,7 +213,7 @@ const Index = () => {
             </div>
 
             {/* Weather Forecast */}
-            <div className="space-y-8 px-4">
+            <div className="space-y-8 px-4 w-full">
               <div className="flex flex-col items-center gap-4">
                 <h2 className="text-3xl font-semibold text-center text-accent drop-shadow-md">
                   Weather Forecast
@@ -219,21 +232,27 @@ const Index = () => {
                   </ToggleGroupItem>
                 </ToggleGroup>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-7xl mx-auto">
-                {visibleForecast &&
-                  visibleForecast.map((day: any, index: number) => {
-                    console.log(day);
-                    return (
-                      <WeatherCard
-                        key={index}
-                        day={index === 0 ? "Today" : day.weekday}
-                        temperature={day.temperatureMax}
-                        weatherCode={day.weatherCode}
-                        className="transform hover:scale-105 transition-all duration-300"
-                        index={index + 1}
-                      />
-                    );
-                  })}
+
+              <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-7xl mx-auto">
+                {visibleForecast ? (
+                  visibleForecast.map((day: any, index: number) => (
+                    <WeatherCard
+                      key={index}
+                      day={index === 0 ? "Today" : day.weekday}
+                      temperature={day.temperatureMax}
+                      weatherCode={day.weatherCode}
+                      className="transform hover:scale-105 transition-all duration-300"
+                      index={index + 1}
+                    />
+                  ))
+                ) : (
+                  <>
+                    <WeatherCardSkeleton /> <WeatherCardSkeleton />
+                    <WeatherCardSkeleton />
+                    <WeatherCardSkeleton />
+                    <WeatherCardSkeleton />
+                  </>
+                )}
               </div>
             </div>
 

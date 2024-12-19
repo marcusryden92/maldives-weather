@@ -8,6 +8,9 @@ import QueryProvider from "@/components/QueryProvider/QueryProvider";
 
 export const metadata: Metadata = {
   title: "Maldives Weather",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
