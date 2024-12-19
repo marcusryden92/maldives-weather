@@ -16,7 +16,6 @@ export type CurrentWeatherData = {
   weatherCode: number; // Assuming `weatherData.current.weatherCode` is a number
   temperature: number; // Assuming `weatherData.current.temperature2m` is a number
   humidity: number; // Assuming `weatherData.current.relativeHumidity2m` is a number
-  uvIndex: number; // Assuming `weatherData.daily.uvIndexMax[0]` is a number
   windSpeed: number; // Assuming `weatherData.current.windSpeed10m` is a number
   isDay: number; // Assuming `weatherData.current.isDay` is a number (e.g., 1 for day, 0 for night)
 };

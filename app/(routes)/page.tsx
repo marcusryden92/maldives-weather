@@ -29,58 +29,6 @@ import {
   WeatherData,
 } from "@/lib/weatherData";
 
-/* const weatherDataObject = {
-  current: {
-    temperature: "29°C",
-    condition: "Partly Cloudy",
-    humidity: "75%",
-    windSpeed: "12 km/h",
-    uvIndex: "High",
-  },
-  forecast: [
-    {
-      day: "Today",
-      temperature: "29°C",
-      condition: "Partly Cloudy",
-      icon: "partly-cloudy",
-    },
-    { day: "Tomorrow", temperature: "28°C", condition: "Sunny", icon: "sunny" },
-    {
-      day: "Wednesday",
-      temperature: "27°C",
-      condition: "Scattered Showers",
-      icon: "scattered-showers",
-    },
-    { day: "Thursday", temperature: "28°C", condition: "Sunny", icon: "sunny" },
-    {
-      day: "Friday",
-      temperature: "29°C",
-      condition: "Partly Cloudy",
-      icon: "partly-cloudy",
-    },
-    { day: "Saturday", temperature: "30°C", condition: "Sunny", icon: "sunny" },
-    {
-      day: "Sunday",
-      temperature: "28°C",
-      condition: "Scattered Showers",
-      icon: "scattered-showers",
-    },
-    {
-      day: "Monday",
-      temperature: "27°C",
-      condition: "Partly Cloudy",
-      icon: "partly-cloudy",
-    },
-    { day: "Tuesday", temperature: "29°C", condition: "Sunny", icon: "sunny" },
-    {
-      day: "Wednesday",
-      temperature: "28°C",
-      condition: "Partly Cloudy",
-      icon: "partly-cloudy",
-    },
-  ],
-}; */
-
 const months = [
   "January",
   "February",
@@ -143,7 +91,7 @@ const Index = () => {
         },
         {
           label: "UV Index",
-          value: weatherDataObject.currentWeather.uvIndex.toString(),
+          value: weatherDataObject.forecast[0].uvIndex.toString(),
           icon: "sun",
         },
       ];
