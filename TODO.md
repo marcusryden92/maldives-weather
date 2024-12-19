@@ -1,5 +1,7 @@
 - Fix 'days' + 'Today' function
 
+- Weather icons
+
 - Fix Forecast 10 day display
 
 - Add locations selection
