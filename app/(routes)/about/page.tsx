@@ -12,6 +12,8 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
+import Image from "next/image";
+
 const visitorData = [
   { month: "Jan", visitors: 15000 },
   { month: "Feb", visitors: 18000 },
@@ -29,10 +31,13 @@ const About = () => {
       <main className="container mx-auto px-4 pt-24 pb-12">
         {/* Hero Section */}
         <div className="relative h-[400px] rounded-lg overflow-hidden mb-12">
-          <img
+          <Image
             src="/lovable-uploads/cbd5b28b-9ef1-4c05-8503-3c3432b41ccd.png"
             alt="Maldives Beach"
-            className="w-full h-full object-cover"
+            layout="intrinsic"
+            width={1200} // Provide the actual width of your image
+            height={800} // Provide the actual height of your image
+            objectFit="cover"
           />
           <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
             <h1 className="text-4xl md:text-5xl font-bold text-white text-center">

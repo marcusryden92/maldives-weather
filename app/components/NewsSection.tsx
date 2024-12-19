@@ -1,12 +1,12 @@
 import {
   Card,
-  CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import Image from "next/image";
 
 export const newsItems = [
   {
@@ -107,11 +107,15 @@ export const NewsSection = ({
               }`}
             >
               <div className="aspect-video relative overflow-hidden">
-                <img
-                  src={news.image}
-                  alt={news.title}
-                  className="object-cover w-full h-full transition-transform duration-300 hover:scale-105"
-                />
+                <div className="relative w-full h-full">
+                  <Image
+                    src={news.image}
+                    alt={news.title}
+                    layout="fill" // Fills the parent container with the image
+                    objectFit="cover" // Ensures the image covers the container while maintaining aspect ratio
+                    className="transition-transform duration-300 hover:scale-105"
+                  />
+                </div>
               </div>
               <CardHeader>
                 <CardTitle className="text-xl">{news.title}</CardTitle>

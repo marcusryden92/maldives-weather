@@ -162,7 +162,7 @@ export default async function fetch14DayForecast(
       isDay: weatherData.current.isDay,
     };
 
-    let weatherArray: WeatherDataArray = [];
+    const weatherArray: WeatherDataArray = [];
 
     // Safely process daily forecast data
     for (let i = 0; i < weatherData.daily.time.length; i++) {

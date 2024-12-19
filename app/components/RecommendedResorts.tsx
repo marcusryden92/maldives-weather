@@ -7,6 +7,8 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
+import Image from "next/image";
+
 const resorts = [
   {
     id: 1,
@@ -61,7 +63,7 @@ export const RecommendedResorts = () => {
         </h2>
         <p className="text-muted-foreground max-w-2xl mx-auto">
           Discover our carefully curated selection of luxury resorts, perfectly
-          matched to each season's weather patterns
+          matched to each season&apos;s weather patterns
         </p>
       </div>
 
@@ -72,11 +74,15 @@ export const RecommendedResorts = () => {
             className="overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-accent group"
           >
             <div className="aspect-video relative overflow-hidden">
-              <img
-                src={resort.image}
-                alt={resort.name}
-                className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
-              />
+              <div className="relative w-full h-full group">
+                <Image
+                  src={resort.image}
+                  alt={resort.name}
+                  layout="fill" // Fills the parent container
+                  objectFit="cover" // Ensures the image covers the container while maintaining its aspect ratio
+                  className="transition-transform duration-500 group-hover:scale-110"
+                />
+              </div>
               <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full">
                 <span className="text-accent font-semibold">
                   ★ {resort.rating}

@@ -54,7 +54,7 @@ export const WeatherCard = ({
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const imageIndex = (index % (backgroundImages.length - 1)) + 1;
 
-  const [codeData, setCodeData] = useState(getWeatherCode(weatherCode)) || "";
+  const [codeData] = useState(getWeatherCode(weatherCode)) || "";
 
   return (
     <>
@@ -94,7 +94,7 @@ export const WeatherCard = ({
         <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="text-2xl font-bold">
-              {day}'s Hourly Forecast
+              {day}&apos;s Hourly Forecast
             </DialogTitle>
           </DialogHeader>
           <HourlyWeather

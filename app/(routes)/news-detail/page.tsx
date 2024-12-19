@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 
+import Image from "next/image";
 const NewsDetail = () => {
   const { id } = useParams();
   const newsItem = newsItems.find((item) => item.id === Number(id));
@@ -42,10 +43,13 @@ const NewsDetail = () => {
 
           <article className="bg-card rounded-lg shadow-lg overflow-hidden">
             <div className="aspect-video relative">
-              <img
+              <Image
                 src={newsItem.image}
                 alt={newsItem.title}
-                className="object-cover w-full h-full"
+                layout="intrinsic"
+                width={1200} // Provide an approximate width or use a reasonable value
+                height={800} // Provide an approximate height or use a reasonable value
+                objectFit="cover"
               />
             </div>
             <div className="p-8">

@@ -7,6 +7,8 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
+import Image from "next/image";
+
 const activities = [
   {
     id: 1,
@@ -60,11 +62,15 @@ export const ActivitiesSection = () => {
             className="overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-accent"
           >
             <div className="aspect-video relative overflow-hidden">
-              <img
-                src={activity.image}
-                alt={activity.title}
-                className="object-cover w-full h-full transition-transform duration-300 hover:scale-105"
-              />
+              <div className="relative w-full h-full">
+                <Image
+                  src={activity.image}
+                  alt={activity.title}
+                  layout="fill" // This will make the image fill the parent container
+                  objectFit="cover" // Similar to 'object-cover'
+                  className="transition-transform duration-300 hover:scale-105"
+                />
+              </div>
             </div>
             <CardHeader>
               <CardTitle className="text-lg">{activity.title}</CardTitle>

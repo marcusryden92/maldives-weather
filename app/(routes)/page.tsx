@@ -26,6 +26,7 @@ import {
   WeatherDataObject,
   WeatherDataArray,
   LocationType,
+  WeatherData,
 } from "@/lib/weatherData";
 
 /* const weatherDataObject = {
@@ -182,7 +183,7 @@ const Index = () => {
                 <p className="text-base text-muted-foreground/80 max-w-3xl mx-auto">
                   Stay informed with real-time weather updates, accurate
                   forecasts, and essential travel insights for the Maldives.
-                  Whether you're planning a beach vacation, water sports
+                  Whether you&apos;re planning a beach vacation, water sports
                   activities, or simply exploring the islands, we provide
                   comprehensive weather information to help you make the most of
                   your Maldivian experience.
@@ -260,7 +261,7 @@ const Index = () => {
 
               <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-7xl mx-auto">
                 {visibleForecast ? (
-                  visibleForecast.map((day: any, index: number) => (
+                  visibleForecast.map((day: WeatherData, index: number) => (
                     <WeatherCard
                       key={index}
                       day={index === 0 ? "Today" : day.weekday}
