@@ -17,7 +17,7 @@ import { NewsSection } from "@/components/NewsSection";
 import { ActivitiesSection } from "@/components/ActivitiesSection";
 import { RecommendedResorts } from "@/components/RecommendedResorts";
 
-import fetchWeather14DaysAction from "@/actions/fetchWeather";
+import fetch14DayForecastAction from "@/actions/fetchWeather";
 
 /* const weatherData = {
   current: {
@@ -104,7 +104,7 @@ const Index = () => {
 
   useEffect(() => {
     async function getWeather() {
-      const data = await fetchWeather14DaysAction();
+      const data = await fetch14DayForecastAction();
       if (data) {
         setWeatherData(data);
       }
@@ -185,8 +185,8 @@ const Index = () => {
                 {weatherData && (
                   <WeatherCard
                     day="Today"
-                    temperature={weatherData.temperatureMax}
-                    condition={weatherData.weatherCode}
+                    temperature={weatherData[0].temperatureMax}
+                    condition={weatherData[0].weatherCode}
                     icon={weatherData[0].weatherIcon}
                     className="transform hover:scale-105 transition-all duration-300"
                     index={0}
@@ -225,7 +225,7 @@ const Index = () => {
                   visibleForecast.map((day: any, index: number) => (
                     <WeatherCard
                       key={index}
-                      day={day.day}
+                      day={index === 0 ? "Today" : day.weekday}
                       temperature={day.temperatureMax}
                       condition={day.weatherCode}
                       icon={day.weatherIcon}

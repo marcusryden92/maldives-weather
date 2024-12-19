@@ -1,9 +1,9 @@
 "use server";
 
-import fetchWeather14Days from "@/api/open-meteo-api";
+import fetch14DayForecast from "@/api/open-meteo-api";
 
-export default async function fetchWeather14DaysAction() {
-  const result = await fetchWeather14Days();
+export default async function fetch14DayForecastAction() {
+  const result = await fetch14DayForecast();
 
   return result;
 }
