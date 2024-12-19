@@ -72,7 +72,7 @@ const Forecast = () => {
             {/* Weather Forecast */}
             <div className="space-y-8 px-4">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
-                {weatherData.forecast.map((day, index) => (
+                {/*  {weatherData.forecast.map((day, index) => (
                   <WeatherCard
                     key={index}
                     day={day.day}
@@ -82,7 +82,7 @@ const Forecast = () => {
                     className="transform hover:scale-105 transition-all duration-300"
                     index={index}
                   />
-                ))}
+                ))} */}
               </div>
             </div>
           </div>
