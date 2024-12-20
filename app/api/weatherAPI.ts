@@ -1,7 +1,7 @@
 import { WeatherDataObject, LocationType } from "@/lib/weatherData";
+import { VariablesWithTime } from "@/lib/weatherData";
 
 import {
-  validateWeatherResponse,
   getCoordinatesForLocation,
   fetchWeatherData,
   processWeatherData,
@@ -48,15 +48,25 @@ export default async function fetchTwoWeekForecast(
   }
 
   const response = responses[0];
-  const current = response.current();
-  const daily = response.daily();
-
-  validateWeatherResponse(response, current, daily);
 
   const utcOffsetSeconds = response.utcOffsetSeconds();
 
-  // Process Weather Data
-  const weatherData = processWeatherData(current, daily, utcOffsetSeconds);
+  const current = response.current() as VariablesWithTime | null;
+  const daily = response.daily() as VariablesWithTime | null;
 
-  return weatherData;
+  if (!current || !daily) {
+    throw new WeatherAPIError(
+      "Incomplete weather data received",
+      "INCOMPLETE_DATA"
+    );
+  }
+
+  // Process Weather Data
+
+  if (current && daily) {
+    const weatherData = processWeatherData(current, daily, utcOffsetSeconds);
+    return weatherData;
+  }
+
+  return null;
 }

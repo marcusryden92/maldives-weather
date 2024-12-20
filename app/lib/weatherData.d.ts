@@ -26,3 +26,15 @@ export type WeatherDataObject = {
 };
 
 export type LocationType = "male" | "addu" | "maafushi" | "fuvahmulah";
+
+export type VariableWithValues = {
+  value: () => number; // For current weather variables
+  valuesArray?: () => number[]; // For daily weather variables
+};
+
+export type VariablesWithTime = {
+  variables: (index: number) => VariableWithValues | null; // Allow null
+  time: () => number | bigint;
+  timeEnd?: () => number; // If used in daily
+  interval?: () => number; // If used in daily
+};

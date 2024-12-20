@@ -2,6 +2,8 @@ import { LocationType, WeatherDataArray } from "@/lib/weatherData";
 
 import { fetchWeatherApi } from "openmeteo";
 
+import { VariablesWithTime } from "@/lib/weatherData";
+
 // Custom Error Class
 export class WeatherAPIError extends Error {
   constructor(message: string, public readonly code?: string) {
@@ -10,30 +12,13 @@ export class WeatherAPIError extends Error {
   }
 }
 
-// Helper: Validate Response Data
-export const validateWeatherResponse = (
-  response: any,
-  current: any,
-  daily: any
-) => {
-  if (!current || !daily) {
-    throw new WeatherAPIError(
-      "Missing current or daily weather data",
-      "INVALID_DATA"
-    );
-  }
-
-  // Convert current.time() to a number explicitly if it's a BigInt
-  const currentTime = current.time();
-
-  // If it's a BigInt, convert it to Number
-  const currentTimeAsNumber =
-    typeof currentTime === "bigint" ? Number(currentTime) : currentTime;
-
-  // Instead of isNaN, we directly check if the value is a valid number
-  if (currentTimeAsNumber <= 0 || !Number.isFinite(currentTimeAsNumber)) {
-    throw new WeatherAPIError("Invalid current time value", "INVALID_TIME");
-  }
+type Params = {
+  latitude: number;
+  longitude: number;
+  current: string[];
+  daily: string[];
+  timezone: string;
+  forecast_days: number;
 };
 
 // Helper: Get Coordinates from Location
@@ -51,7 +36,7 @@ export const getCoordinatesForLocation = (location: LocationType) => {
 };
 
 // Helper: API call
-export const fetchWeatherData = async (url: string, params: any) => {
+export const fetchWeatherData = async (url: string, params: Params) => {
   try {
     return await fetchWeatherApi(url, params);
   } catch (error) {
@@ -65,7 +50,10 @@ export const fetchWeatherData = async (url: string, params: any) => {
 };
 
 // Helper: Helper Function to Get Variables
-export const getCurrentVariable = (current: any, index: number) => {
+export const getCurrentVariable = (
+  current: VariablesWithTime,
+  index: number
+): number => {
   const variable = current.variables(index);
   if (!variable) {
     throw new WeatherAPIError(
@@ -73,10 +61,13 @@ export const getCurrentVariable = (current: any, index: number) => {
       "MISSING_VARIABLE"
     );
   }
-  return variable.value();
+  return variable.value ? variable.value() : 0; // Default to 0 if undefined
 };
 
-export const getDailyVariable = (daily: any, index: number) => {
+export const getDailyVariable = (
+  daily: VariablesWithTime,
+  index: number
+): number[] => {
   const variable = daily.variables(index);
   if (!variable) {
     throw new WeatherAPIError(
@@ -84,20 +75,13 @@ export const getDailyVariable = (daily: any, index: number) => {
       "MISSING_VARIABLE"
     );
   }
-  const values = variable.valuesArray();
-  if (!values) {
-    throw new WeatherAPIError(
-      `No values array for daily variable at index ${index}`,
-      "MISSING_VALUES"
-    );
-  }
-  return values;
+  return variable.valuesArray ? variable.valuesArray() : []; // Default to empty array
 };
 
 // Helper: Process Weather Data
 export const processWeatherData = (
-  current: any,
-  daily: any,
+  current: VariablesWithTime,
+  daily: VariablesWithTime,
   utcOffsetSeconds: number
 ) => {
   const range = (start: number, stop: number, step: number) =>
@@ -118,12 +102,17 @@ export const processWeatherData = (
     windSpeed: Number(getCurrentVariable(current, 4).toFixed(0)), // Wind speed, rounded to an integer
   };
 
+  const dailyTime =
+    daily.time !== null && daily.timeEnd && daily.interval
+      ? range(
+          Number(daily.time()),
+          Number(daily.timeEnd()),
+          daily.interval()
+        ).map((t) => new Date((t + utcOffsetSeconds) * 1000))
+      : [];
+
   const dailyData = {
-    time: range(
-      Number(daily.time()),
-      Number(daily.timeEnd()),
-      daily.interval()
-    ).map((t) => new Date((t + utcOffsetSeconds) * 1000)),
+    time: dailyTime,
     weatherCode: getDailyVariable(daily, 0),
     temperature2mMax: getDailyVariable(daily, 1),
     temperature2mMin: getDailyVariable(daily, 2),
@@ -137,7 +126,7 @@ export const processWeatherData = (
     weatherCode: dailyData.weatherCode[i],
     temperatureMax: Number(dailyData.temperature2mMax[i].toFixed(0)),
     temperatureMin: dailyData.temperature2mMin[i],
-    uvIndex: dailyData.uvIndexMax[i].toFixed(1),
+    uvIndex: Number(dailyData.uvIndexMax[i].toFixed(1)),
     windSpeedMax: dailyData.windSpeed10mMax[i],
   }));
 
