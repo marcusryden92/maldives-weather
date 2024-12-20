@@ -112,7 +112,6 @@ export const NewsSection = ({
                     src={news.image}
                     alt={news.title}
                     layout="fill" // Fills the parent container with the image
-                    objectFit="cover" // Ensures the image covers the container while maintaining aspect ratio
                     className="transition-transform duration-300 hover:scale-105"
                   />
                 </div>

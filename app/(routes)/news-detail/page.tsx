@@ -50,7 +50,6 @@ const NewsDetail = () => {
                 layout="intrinsic"
                 width={1200} // Provide an approximate width or use a reasonable value
                 height={800} // Provide an approximate height or use a reasonable value
-                objectFit="cover"
               />
             </div>
             <div className="p-8">

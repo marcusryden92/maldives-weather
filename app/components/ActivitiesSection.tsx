@@ -67,7 +67,6 @@ export const ActivitiesSection = () => {
                   src={activity.image}
                   alt={activity.title}
                   layout="fill" // This will make the image fill the parent container
-                  objectFit="cover" // Similar to 'object-cover'
                   className="transition-transform duration-300 hover:scale-105"
                 />
               </div>

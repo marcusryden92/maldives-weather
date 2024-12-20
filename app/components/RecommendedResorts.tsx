@@ -79,7 +79,6 @@ export const RecommendedResorts = () => {
                   src={resort.image}
                   alt={resort.name}
                   layout="fill" // Fills the parent container
-                  objectFit="cover" // Ensures the image covers the container while maintaining its aspect ratio
                   className="transition-transform duration-500 group-hover:scale-110"
                 />
               </div>

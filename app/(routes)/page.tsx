@@ -172,6 +172,7 @@ const Index = () => {
                     day="Today"
                     temperature={weatherDataObject.forecast[0].temperatureMax}
                     weatherCode={weatherDataObject.forecast[0].weatherCode}
+                    hourlyData={weatherDataObject.hourlyForecast[0]}
                     className="transform hover:scale-105 transition-all duration-300"
                     index={1}
                   />
@@ -208,13 +209,14 @@ const Index = () => {
               </div>
 
               <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-7xl mx-auto">
-                {visibleForecast ? (
+                {visibleForecast && weatherDataObject ? (
                   visibleForecast.map((day: WeatherData, index: number) => (
                     <WeatherCard
                       key={index}
                       day={index === 0 ? "Today" : day.weekday}
                       temperature={day.temperatureMax}
                       weatherCode={day.weatherCode}
+                      hourlyData={weatherDataObject.hourlyForecast[index]}
                       className="transform hover:scale-105 transition-all duration-300"
                       index={index + 1}
                     />

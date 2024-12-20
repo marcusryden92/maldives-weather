@@ -11,8 +11,9 @@ import {
 import { useState } from "react";
 import { HourlyWeather } from "./HourlyWeather";
 
-import weatherIcons from "@/lib/weather-icons";
+import { HourlyWeatherData } from "@/lib/weatherData";
 
+import { getWeatherCode } from "@/utils/weatherHelpers";
 import Image from "next/image";
 
 interface WeatherCardProps {
@@ -21,6 +22,7 @@ interface WeatherCardProps {
   weatherCode: number;
   className?: string;
   index: number;
+  hourlyData: HourlyWeatherData[];
 }
 
 const backgroundImages = [
@@ -36,20 +38,13 @@ const backgroundImages = [
   "/lovable-uploads/d958e7d2-d44c-4560-9ae3-79cba767b336.png",
 ];
 
-function getWeatherCode(weatherCode: number) {
-  return weatherIcons.find((c) => {
-    if (c.code === weatherCode) {
-      return c;
-    }
-  });
-}
-
 export const WeatherCard = ({
   day,
   temperature,
   weatherCode,
   className,
   index,
+  hourlyData,
 }: WeatherCardProps) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const imageIndex = (index % (backgroundImages.length - 1)) + 1;
@@ -100,8 +95,7 @@ export const WeatherCard = ({
           <HourlyWeather
             day={day}
             backgroundImage={backgroundImages[imageIndex]}
-            weatherCode={codeData?.description || ""}
-            temperature={temperature}
+            hourlyData={hourlyData}
           />
         </DialogContent>
       </Dialog>

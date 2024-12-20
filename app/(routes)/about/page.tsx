@@ -37,7 +37,6 @@ const About = () => {
             layout="intrinsic"
             width={1200} // Provide the actual width of your image
             height={800} // Provide the actual height of your image
-            objectFit="cover"
           />
           <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
             <h1 className="text-4xl md:text-5xl font-bold text-white text-center">

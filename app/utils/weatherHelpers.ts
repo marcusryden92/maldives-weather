@@ -6,6 +6,8 @@ import {
 import { fetchWeatherApi } from "openmeteo";
 import { VariablesWithTime } from "@/lib/weatherData";
 
+import weatherIcons from "@/lib/weather-icons";
+
 // Custom Error Class
 export class WeatherAPIError extends Error {
   constructor(message: string, public readonly code?: string) {
@@ -23,6 +25,15 @@ type Params = {
   timezone: string;
   forecast_days: number;
 };
+
+// Get weather code icon and description
+export function getWeatherCode(weatherCode: number) {
+  return weatherIcons.find((c) => {
+    if (c.code === weatherCode) {
+      return c;
+    }
+  });
+}
 
 // Helper: Get Coordinates from Location
 export const getCoordinatesForLocation = (location: LocationType) => {
