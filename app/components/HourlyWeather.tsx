@@ -22,6 +22,7 @@ export const HourlyWeather = ({
   backgroundImage,
   hourlyData,
 }: HourlyWeatherProps) => {
+  console.log(hourlyData);
   return (
     <div className="space-y-6">
       <div

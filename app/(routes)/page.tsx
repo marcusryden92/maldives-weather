@@ -21,6 +21,19 @@ import fetchTwoWeekForecastAction from "@/actions/fetchTwoWeekForecast";
 
 import { WeatherCardSkeleton } from "@/components/WeatherCardSkeleton";
 
+import Image from "next/image";
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
+import { Button } from "@/components/ui/button";
+
 // Types
 import {
   WeatherDataObject,
@@ -62,6 +75,18 @@ const Index = () => {
     { label: "Wind Speed", value: "- km/h", icon: "wind" },
     { label: "UV Index", value: "-", icon: "sun" },
   ]);
+  const currentMonth = new Date().toLocaleString("default", { month: "long" });
+
+  const resort = {
+    id: 1,
+    name: "Sunsiyam Resort",
+    description:
+      "Experience luxury overwater villas with stunning sunset views",
+    bestMonths: ["January", "February", "March"],
+    price: "From $850/night",
+    image: "/lovable-uploads/bc91b83b-031c-49dc-bf12-dc893bfd081c.png",
+    rating: 4.9,
+  };
 
   useEffect(() => {
     async function getWeather() {
@@ -138,7 +163,6 @@ const Index = () => {
                 </p>
               </div>
             </div>
-
             {/* Location and Month Selection */}
             <div className="flex flex-col md:flex-row justify-center gap-4 max-w-4xl mx-auto">
               <div className="w-full md:w-64 backdrop-blur-md bg-white/20 p-6 rounded-xl shadow-lg">
@@ -163,28 +187,86 @@ const Index = () => {
                 </Select>
               </div>
             </div>
+            <div className="flex">
+              <div className="flex flex-col w-[70%] h-full gap-10">
+                {/* Weather Card */}
+                <div className="flex justify-center px-4">
+                  <div className="w-full max-w-4xl">
+                    {weatherDataObject &&
+                    weatherDataObject.forecast.length > 0 ? (
+                      <WeatherCard
+                        day="Today"
+                        temperature={
+                          weatherDataObject.forecast[0].temperatureMax
+                        }
+                        weatherCode={weatherDataObject.forecast[0].weatherCode}
+                        hourlyData={weatherDataObject.hourlyForecast[0]}
+                        className="transform hover:scale-105 transition-all duration-300"
+                        index={1}
+                      />
+                    ) : (
+                      <WeatherCardSkeleton />
+                    )}
+                  </div>
+                </div>
 
-            {/* Weather Card */}
-            <div className="flex justify-center px-4">
-              <div className="w-full max-w-4xl">
-                {weatherDataObject && weatherDataObject.forecast.length > 0 ? (
-                  <WeatherCard
-                    day="Today"
-                    temperature={weatherDataObject.forecast[0].temperatureMax}
-                    weatherCode={weatherDataObject.forecast[0].weatherCode}
-                    hourlyData={weatherDataObject.hourlyForecast[0]}
-                    className="transform hover:scale-105 transition-all duration-300"
-                    index={1}
-                  />
-                ) : (
-                  <WeatherCardSkeleton />
-                )}
+                {/* Weather Metrics */}
+                <div className="w-[95%] mx-auto px-4">
+                  <WeatherMetrics metrics={metrics} />
+                </div>
               </div>
-            </div>
-
-            {/* Weather Metrics */}
-            <div className="max-w-6xl mx-auto px-4">
-              <WeatherMetrics metrics={metrics} />
+              <div>
+                <Card
+                  key={resort.id}
+                  className="overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-accent group"
+                >
+                  <div className="aspect-video relative overflow-hidden">
+                    <div className="relative w-full h-full group">
+                      <Image
+                        src={resort.image}
+                        alt={resort.name}
+                        layout="fill" // Fills the parent container
+                        className="transition-transform duration-500 group-hover:scale-110"
+                      />
+                    </div>
+                    <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full">
+                      <span className="text-accent font-semibold">
+                        ★ {resort.rating}
+                      </span>
+                    </div>
+                  </div>
+                  <CardHeader>
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <CardTitle className="text-xl">{resort.name}</CardTitle>
+                        <CardDescription className="mt-2">
+                          {resort.description}
+                        </CardDescription>
+                      </div>
+                      <span className="font-semibold text-accent whitespace-nowrap">
+                        {resort.price}
+                      </span>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="flex flex-wrap gap-2">
+                      {resort.bestMonths.map((month) => (
+                        <span
+                          key={month}
+                          className={`text-xs px-3 py-1 rounded-full ${
+                            month === currentMonth
+                              ? "bg-accent text-white"
+                              : "bg-accent/10 text-accent"
+                          }`}
+                        >
+                          {month}
+                        </span>
+                      ))}
+                    </div>
+                    <Button className="w-full">Book Now</Button>
+                  </CardContent>
+                </Card>
+              </div>
             </div>
 
             {/* Weather Forecast */}
