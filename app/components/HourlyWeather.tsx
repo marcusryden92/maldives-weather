@@ -1,4 +1,3 @@
-import { Sun, CloudRain, Cloud, CloudSun } from "lucide-react";
 import { HourlyWeatherData } from "@/lib/weatherData";
 
 import { formatHourString } from "@/utils/formatting";
