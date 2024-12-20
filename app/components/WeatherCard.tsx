@@ -55,7 +55,7 @@ export const WeatherCard = ({
     <>
       <Card
         className={cn(
-          "p-8 border-none shadow-lg hover:shadow-xl transition-all duration-300 animate-fade-up overflow-hidden group relative text-white cursor-pointer",
+          "h-auto p-8 border-none shadow-lg hover:shadow-xl transition-all duration-300 animate-fade-up overflow-hidden group relative text-white cursor-pointer",
           className
         )}
         style={{
@@ -72,8 +72,8 @@ export const WeatherCard = ({
             <Image
               src={`/weather-icons/${codeData?.icon_day}`}
               alt={codeData?.description || "Weather icon"}
-              width={80}
-              height={80}
+              width={60}
+              height={60}
               priority={true}
               style={{ filter: "invert(1)" }} // Inverts color to white
             />

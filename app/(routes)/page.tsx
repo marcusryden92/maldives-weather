@@ -27,7 +27,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -187,8 +186,8 @@ const Index = () => {
                 </Select>
               </div>
             </div>
-            <div className="flex">
-              <div className="flex flex-col w-[70%] h-full gap-10">
+            <div className="flex  px-4 w-full max-w-7xl mx-auto">
+              <div className="flex flex-col justify-between w-[80%] h-auto">
                 {/* Weather Card */}
                 <div className="flex justify-center px-4">
                   <div className="w-full max-w-4xl">
@@ -211,7 +210,7 @@ const Index = () => {
                 </div>
 
                 {/* Weather Metrics */}
-                <div className="w-[95%] mx-auto px-4">
+                <div className="w-full mx-auto px-4">
                   <WeatherMetrics metrics={metrics} />
                 </div>
               </div>
@@ -270,7 +269,7 @@ const Index = () => {
             </div>
 
             {/* Weather Forecast */}
-            <div className="space-y-8 px-4 w-full">
+            <div className="space-y-8 px-4 w-full max-w-7xl mx-auto">
               <div className="flex flex-col items-center gap-4">
                 <h2 className="text-3xl font-semibold text-center text-accent drop-shadow-md">
                   Weather Forecast
