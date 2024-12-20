@@ -20,11 +20,17 @@ export type CurrentWeatherData = {
   isDay: number; // Assuming `weatherData.current.isDay` is a number (e.g., 1 for day, 0 for night)
 };
 
-export type WeatherDataObject = {
-  currentWeather: CurrentWeatherData;
-  forecast: WeatherDataArray;
+export type HourlyWeatherData = {
+  time: string;
+  temperature: number;
+  weatherCode: number;
 };
 
+export type WeatherDataObject = {
+  currentWeather: CurrentWeather;
+  hourlyForecast: HourlyWeatherData[];
+  forecast: WeatherDataArray;
+};
 export type LocationType = "male" | "addu" | "maafushi" | "fuvahmulah";
 
 export type VariableWithValues = {

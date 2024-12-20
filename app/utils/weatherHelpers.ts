@@ -1,7 +1,9 @@
-import { LocationType, WeatherDataArray } from "@/lib/weatherData";
-
+import {
+  LocationType,
+  WeatherDataArray,
+  HourlyWeatherData,
+} from "@/lib/weatherData";
 import { fetchWeatherApi } from "openmeteo";
-
 import { VariablesWithTime } from "@/lib/weatherData";
 
 // Custom Error Class
@@ -16,6 +18,7 @@ type Params = {
   latitude: number;
   longitude: number;
   current: string[];
+  hourly: string[];
   daily: string[];
   timezone: string;
   forecast_days: number;
@@ -49,7 +52,7 @@ export const fetchWeatherData = async (url: string, params: Params) => {
   }
 };
 
-// Helper: Helper Function to Get Variables
+// Helper: Get Variables Functions
 export const getCurrentVariable = (
   current: VariablesWithTime,
   index: number
@@ -61,7 +64,21 @@ export const getCurrentVariable = (
       "MISSING_VARIABLE"
     );
   }
-  return variable.value ? variable.value() : 0; // Default to 0 if undefined
+  return variable.value ? variable.value() : 0;
+};
+
+export const getHourlyVariable = (
+  hourly: VariablesWithTime,
+  index: number
+): number[] => {
+  const variable = hourly.variables(index);
+  if (!variable) {
+    throw new WeatherAPIError(
+      `Missing hourly weather variable at index ${index}`,
+      "MISSING_VARIABLE"
+    );
+  }
+  return variable.valuesArray ? variable.valuesArray() : [];
 };
 
 export const getDailyVariable = (
@@ -75,18 +92,20 @@ export const getDailyVariable = (
       "MISSING_VARIABLE"
     );
   }
-  return variable.valuesArray ? variable.valuesArray() : []; // Default to empty array
+  return variable.valuesArray ? variable.valuesArray() : [];
 };
 
 // Helper: Process Weather Data
 export const processWeatherData = (
   current: VariablesWithTime,
+  hourly: VariablesWithTime,
   daily: VariablesWithTime,
   utcOffsetSeconds: number
 ) => {
   const range = (start: number, stop: number, step: number) =>
     Array.from({ length: (stop - start) / step }, (_, i) => start + i * step);
 
+  // Process current weather
   const currentData = {
     time: new Date((Number(current.time()) + utcOffsetSeconds) * 1000),
     temperature2m: getCurrentVariable(current, 0),
@@ -97,11 +116,28 @@ export const processWeatherData = (
     weekday: new Date(
       (Number(current.time()) + utcOffsetSeconds) * 1000
     ).toLocaleDateString("en-US", { weekday: "long" }),
-    temperature: Number(getCurrentVariable(current, 0).toFixed(0)), // Convert temperature to a number and round it
-    humidity: getCurrentVariable(current, 1), // Relative humidity
-    windSpeed: Number(getCurrentVariable(current, 4).toFixed(0)), // Wind speed, rounded to an integer
+    temperature: Number(getCurrentVariable(current, 0).toFixed(0)),
+    humidity: getCurrentVariable(current, 1),
+    windSpeed: Number(getCurrentVariable(current, 4).toFixed(0)),
   };
 
+  // Process hourly forecast
+  const hourlyTime =
+    hourly.time !== null && hourly.timeEnd && hourly.interval
+      ? range(
+          Number(hourly.time()),
+          Number(hourly.timeEnd()),
+          hourly.interval()
+        ).map((t) => new Date((t + utcOffsetSeconds) * 1000))
+      : [];
+
+  const hourlyData: HourlyWeatherData[] = hourlyTime.map((time, i) => ({
+    time: time.toISOString(),
+    temperature: Number(getHourlyVariable(hourly, 0)[i].toFixed(1)),
+    weatherCode: getHourlyVariable(hourly, 1)[i],
+  }));
+
+  // Process daily forecast
   const dailyTime =
     daily.time !== null && daily.timeEnd && daily.interval
       ? range(
@@ -132,6 +168,7 @@ export const processWeatherData = (
 
   return {
     currentWeather: currentData,
+    hourlyForecast: hourlyData,
     forecast: weatherArray,
   };
 };

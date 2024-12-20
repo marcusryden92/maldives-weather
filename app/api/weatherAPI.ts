@@ -23,6 +23,7 @@ export default async function fetchTwoWeekForecast(
   const params = {
     latitude: coordinates.latitude,
     longitude: coordinates.longitude,
+    hourly: ["temperature_2m", "weather_code"],
     current: [
       "temperature_2m",
       "relative_humidity_2m",
@@ -48,13 +49,13 @@ export default async function fetchTwoWeekForecast(
   }
 
   const response = responses[0];
-
   const utcOffsetSeconds = response.utcOffsetSeconds();
 
   const current = response.current() as VariablesWithTime | null;
+  const hourly = response.hourly() as VariablesWithTime | null;
   const daily = response.daily() as VariablesWithTime | null;
 
-  if (!current || !daily) {
+  if (!current || !hourly || !daily) {
     throw new WeatherAPIError(
       "Incomplete weather data received",
       "INCOMPLETE_DATA"
@@ -62,11 +63,11 @@ export default async function fetchTwoWeekForecast(
   }
 
   // Process Weather Data
-
-  if (current && daily) {
-    const weatherData = processWeatherData(current, daily, utcOffsetSeconds);
-    return weatherData;
-  }
-
-  return null;
+  const weatherData = processWeatherData(
+    current,
+    hourly,
+    daily,
+    utcOffsetSeconds
+  );
+  return weatherData;
 }
