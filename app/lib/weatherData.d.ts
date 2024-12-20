@@ -28,7 +28,7 @@ export type HourlyWeatherData = {
 
 export type WeatherDataObject = {
   currentWeather: CurrentWeather;
-  hourlyForecast: HourlyWeatherData[];
+  hourlyForecast: HourlyWeatherData[][];
   forecast: WeatherDataArray;
 };
 export type LocationType = "male" | "addu" | "maafushi" | "fuvahmulah";

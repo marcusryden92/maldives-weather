@@ -131,11 +131,33 @@ export const processWeatherData = (
         ).map((t) => new Date((t + utcOffsetSeconds) * 1000))
       : [];
 
-  const hourlyData: HourlyWeatherData[] = hourlyTime.map((time, i) => ({
-    time: time.toISOString(),
-    temperature: Number(getHourlyVariable(hourly, 0)[i].toFixed(1)),
-    weatherCode: getHourlyVariable(hourly, 1)[i],
-  }));
+  // Group hourly data by day
+  const hourlyData: HourlyWeatherData[][] = [];
+  let currentDayData: HourlyWeatherData[] = [];
+  let currentDay = -1;
+
+  hourlyTime.forEach((time, i) => {
+    const dayOfMonth = time.getDate();
+
+    if (currentDay !== dayOfMonth) {
+      if (currentDayData.length > 0) {
+        hourlyData.push(currentDayData);
+        currentDayData = [];
+      }
+      currentDay = dayOfMonth;
+    }
+
+    currentDayData.push({
+      time: time.toISOString(),
+      temperature: Number(getHourlyVariable(hourly, 0)[i].toFixed(1)),
+      weatherCode: getHourlyVariable(hourly, 1)[i],
+    });
+  });
+
+  // Push the last day's data
+  if (currentDayData.length > 0) {
+    hourlyData.push(currentDayData);
+  }
 
   // Process daily forecast
   const dailyTime =
