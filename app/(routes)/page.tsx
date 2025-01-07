@@ -5,13 +5,7 @@ import { WeatherCard } from "@/components/WeatherCard";
 import { WeatherMetrics } from "@/components/WeatherMetrics";
 import { LocationSelector } from "@/components/LocationSelector";
 import Header from "@/components/Header";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { NewsSection } from "@/components/NewsSection";
 import { ActivitiesSection } from "@/components/ActivitiesSection";
@@ -40,21 +34,6 @@ import {
   LocationType,
   WeatherData,
 } from "@/lib/weatherData";
-
-const months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
 
 const Index = () => {
   const [selectedLocation, setSelectedLocation] =
@@ -167,24 +146,34 @@ const Index = () => {
               <div className="w-full md:w-64 backdrop-blur-md bg-white/20 p-6 rounded-xl shadow-lg">
                 <LocationSelector onLocationChange={setSelectedLocation} />
               </div>
-              <div className="w-full md:w-64 backdrop-blur-md bg-white/20 p-6 rounded-xl shadow-lg">
-                <Select value={selectedMonth} onValueChange={setSelectedMonth}>
-                  <SelectTrigger className="w-full backdrop-blur-sm bg-white/80 border-white/20 text-gray-800 font-medium">
-                    <SelectValue placeholder="Select month" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-white/95 backdrop-blur-md border-white/20">
-                    {months.map((month, index) => (
-                      <SelectItem
-                        key={index}
-                        value={index.toString()}
-                        className="text-gray-800 hover:bg-accent/20 focus:bg-accent/20"
-                      >
-                        {month}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
+              <Button
+                onClick={() => {
+                  setSelectedLocation("male");
+                }}
+              >
+                Malé
+              </Button>
+              <Button
+                onClick={() => {
+                  setSelectedLocation("addu");
+                }}
+              >
+                Addu City
+              </Button>
+              <Button
+                onClick={() => {
+                  setSelectedLocation("maafushi");
+                }}
+              >
+                Mafushi
+              </Button>
+              <Button
+                onClick={() => {
+                  setSelectedLocation("fuvahmulah");
+                }}
+              >
+                Fuvahmulah
+              </Button>
             </div>
             <div className="flex flex-col lg:flex-row gap-8  w-full max-w-7xl mx-auto">
               <div className="flex flex-col justify-between gap-4 lg:w-[80%] h-auto">
