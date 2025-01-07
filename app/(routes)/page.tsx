@@ -143,37 +143,12 @@ const Index = () => {
             </div>
             {/* Location and Month Selection */}
             <div className="flex flex-col md:flex-row justify-center gap-4 max-w-4xl mx-auto">
-              <div className="w-full md:w-64 backdrop-blur-md bg-white/20 p-6 rounded-xl shadow-lg">
-                <LocationSelector onLocationChange={setSelectedLocation} />
+              <div className="flex gap-4 backdrop-blur-md  p-6 rounded-xl ">
+                <LocationSelector
+                  selectedLocation={selectedLocation}
+                  onLocationChange={setSelectedLocation}
+                />
               </div>
-              <Button
-                onClick={() => {
-                  setSelectedLocation("male");
-                }}
-              >
-                Malé
-              </Button>
-              <Button
-                onClick={() => {
-                  setSelectedLocation("addu");
-                }}
-              >
-                Addu City
-              </Button>
-              <Button
-                onClick={() => {
-                  setSelectedLocation("maafushi");
-                }}
-              >
-                Mafushi
-              </Button>
-              <Button
-                onClick={() => {
-                  setSelectedLocation("fuvahmulah");
-                }}
-              >
-                Fuvahmulah
-              </Button>
             </div>
             <div className="flex flex-col lg:flex-row gap-8  w-full max-w-7xl mx-auto">
               <div className="flex flex-col justify-between gap-4 lg:w-[80%] h-auto">

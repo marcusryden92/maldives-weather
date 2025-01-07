@@ -16,10 +16,12 @@ const locations = [
 ] as const;
 
 interface LocationSelectorProps {
+  selectedLocation: string;
   onLocationChange: Dispatch<SetStateAction<LocationType>>;
 }
 
 export const LocationSelector: React.FC<LocationSelectorProps> = ({
+  selectedLocation,
   onLocationChange,
 }) => {
   const handleValueChange = (value: string) => {
@@ -27,23 +29,22 @@ export const LocationSelector: React.FC<LocationSelectorProps> = ({
   };
 
   return (
-    <div className="w-full max-w-xs animate-fade-in">
-      <Select onValueChange={handleValueChange}>
-        <SelectTrigger className="w-full backdrop-blur-sm bg-white/80 border-white/20 text-gray-800 font-medium">
-          <SelectValue placeholder="Select location" />
-        </SelectTrigger>
-        <SelectContent className="bg-white/95 backdrop-blur-md border-white/20">
-          {locations.map((location) => (
-            <SelectItem
-              key={location.id}
-              value={location.id}
-              className="text-gray-800 hover:bg-accent/20 focus:bg-accent/20"
-            >
-              {location.name}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
+    <div className="flex w-full gap-4 animate-fade-in">
+      {locations.map((location) => (
+        <button
+          key={location.id}
+          onClick={() => {
+            handleValueChange(location.id);
+          }}
+          className={`min-w-[10rem] px-5 py-2 rounded-md text-gray-800 hover:bg-accent/20  ${
+            selectedLocation === location.id
+              ? "shadow-inner-heavy"
+              : "shadow-md"
+          }`}
+        >
+          {location.name}
+        </button>
+      ))}
     </div>
   );
 };

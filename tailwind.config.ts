@@ -41,6 +41,9 @@ export default {
           foreground: "#FFFFFF",
         },
       },
+      boxShadow: {
+        "inner-heavy": "inset 0 4px 8px rgba(0, 0, 0, 0.15)", // Adjust values as needed
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
