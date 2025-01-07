@@ -1,10 +1,3 @@
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { LocationType } from "@/lib/weatherData";
 import { Dispatch, SetStateAction } from "react";
 

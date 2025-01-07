@@ -38,9 +38,7 @@ import {
 const Index = () => {
   const [selectedLocation, setSelectedLocation] =
     useState<LocationType>("male");
-  const [selectedMonth, setSelectedMonth] = useState(
-    new Date().getMonth().toString()
-  );
+
   const [forecastDays, setForecastDays] = useState("5");
 
   const [weatherDataObject, setWeatherDataObject] =
