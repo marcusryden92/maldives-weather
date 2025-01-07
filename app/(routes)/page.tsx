@@ -159,6 +159,7 @@ const Index = () => {
                     weatherDataObject.forecast.length > 0 ? (
                       <WeatherCard
                         day="Today"
+                        time={weatherDataObject.forecast[0].time}
                         temperature={
                           weatherDataObject.forecast[0].temperatureMax
                         }
@@ -259,6 +260,7 @@ const Index = () => {
                     <WeatherCard
                       key={index}
                       day={index === 0 ? "Today" : day.weekday}
+                      time={weatherDataObject.forecast[index].time}
                       temperature={day.temperatureMax}
                       weatherCode={day.weatherCode}
                       hourlyData={weatherDataObject.hourlyForecast[index]}

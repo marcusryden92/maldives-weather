@@ -16,8 +16,11 @@ import { HourlyWeatherData } from "@/lib/weatherData";
 import { getWeatherCode } from "@/utils/weatherHelpers";
 import Image from "next/image";
 
+import { convertDateFormat } from "@/utils/formatting";
+
 interface WeatherCardProps {
   day: string;
+  time: string;
   temperature: number;
   weatherCode: number;
   className?: string;
@@ -40,6 +43,7 @@ const backgroundImages = [
 
 export const WeatherCard = ({
   day,
+  time,
   temperature,
   weatherCode,
   className,
@@ -50,6 +54,8 @@ export const WeatherCard = ({
   const imageIndex = (index % (backgroundImages.length - 1)) + 1;
 
   const [codeData] = useState(getWeatherCode(weatherCode)) || "";
+
+  const date = convertDateFormat(time);
 
   return (
     <>
@@ -67,7 +73,9 @@ export const WeatherCard = ({
       >
         <div className="absolute inset-0 bg-black/30 backdrop-blur-[2px] transition-all duration-300 group-hover:backdrop-blur-0 group-hover:bg-black/20" />
         <div className="relative z-10 flex flex-col items-center space-y-6">
-          <span className="text-lg font-medium">{day}</span>
+          <span className="text-lg font-medium">
+            {day} {date}
+          </span>
           <div className="rounded-full p-4 bg-white/20 group-hover:scale-110 transition-transform duration-300">
             <Image
               src={`/weather-icons/${codeData?.icon_day}`}
