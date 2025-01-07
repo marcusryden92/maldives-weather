@@ -40,6 +40,7 @@ export default async function fetchTwoWeekForecast(
     ],
     timezone: "auto",
     forecast_days: 14,
+    models: "cma_grapes_global",
   };
 
   const url = "https://api.open-meteo.com/v1/forecast";
