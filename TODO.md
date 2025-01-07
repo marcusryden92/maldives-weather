@@ -1,5 +1,9 @@
-- Add locations selection
-
-- Add hours display for each day
-
-- Weather data type
+- Previous Forecasts
+- Fix icon issues
+- Meta tags
+- Book now buttons to point to maldivescamping.com and resorts respecitively
+- Book now buttons hover effect
+- Landing page layout and clean-up
+- News API/CMS
+- Color scheme
+- Responsiveness

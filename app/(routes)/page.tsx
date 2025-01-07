@@ -122,7 +122,7 @@ const Index = () => {
             {/* Enhanced Header Section */}
             <div className="text-center space-y-6 max-w-4xl mx-auto">
               <h1 className="text-6xl md:text-7xl font-bold bg-gradient-to-r from-accent via-accent/80 to-accent bg-clip-text text-transparent drop-shadow-lg animate-fade-up">
-                Maldives Weather
+                Weather Maldives
               </h1>
               <div
                 className="space-y-4 animate-fade-up"

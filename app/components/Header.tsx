@@ -22,7 +22,7 @@ const Header = () => {
           <Link href="/" className="flex items-center space-x-2">
             <Sun className="h-8 w-8 text-white animate-pulse" />
             <span className="text-2xl font-bold text-white">
-              Maldives Weather
+              Weather Maldives
             </span>
           </Link>
 
