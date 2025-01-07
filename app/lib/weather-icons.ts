@@ -98,8 +98,8 @@ const weatherIcons = [
   {
     code: 16,
     description: "Sleet or ice pellets",
-    icon_day: "wi-day-sleet-storm.svg",
-    icon_night: "wi-night-alt-sleet-storm.svg",
+    icon_day: "wi-day-sleet.svg",
+    icon_night: "wi-night-alt-sleet.svg",
   },
   {
     code: 17,
@@ -110,14 +110,14 @@ const weatherIcons = [
   {
     code: 18,
     description: "Moderate sleet or ice pellets",
-    icon_day: "wi-day-sleet-storm.svg",
+    icon_day: "wi-day-sleet.svg",
     icon_night: "wi-night-alt-sleet.svg",
   },
   {
     code: 19,
     description: "Heavy sleet or ice pellets",
-    icon_day: "wi-day-sleet-storm.svg",
-    icon_night: "wi-night-alt-sleet-storm.svg",
+    icon_day: "wi-day-sleet.svg",
+    icon_night: "wi-night-alt-sleet.svg",
   },
   {
     code: 20,
@@ -135,8 +135,8 @@ const weatherIcons = [
   {
     code: 22,
     description: "Snow grains",
-    icon_day: "wi-day-snowflake-cold.svg",
-    icon_night: "wi-night-snowflake-cold.svg",
+    icon_day: "wi-snowflake-cold.svg",
+    icon_night: "wi-snowflake-cold.svg",
   },
   {
     code: 23,
@@ -195,26 +195,26 @@ const weatherIcons = [
   {
     code: 32,
     description: "Thunderstorm with light hail",
-    icon_day: "wi-day-hail.svg",
-    icon_night: "wi-night-hail.svg",
+    icon_day: "wi-day-sleet-storm.svg",
+    icon_night: "wi-night-alt-sleet-storm.svg",
   },
   {
     code: 33,
     description: "Thunderstorm with moderate hail",
-    icon_day: "wi-day-hail.svg",
-    icon_night: "wi-night-hail.svg",
+    icon_day: "wi-day-sleet-storm.svg",
+    icon_night: "wi-night-alt-sleet-storm.svg",
   },
   {
     code: 34,
     description: "Thunderstorm with heavy hail",
-    icon_day: "wi-day-hail.svg",
-    icon_night: "wi-night-hail.svg",
+    icon_day: "wi-day-sleet-storm.svg",
+    icon_night: "wi-night-alt-sleet-storm.svg",
   },
   {
     code: 35,
     description: "Snow flurries",
-    icon_day: "wi-day-snowflake-cold.svg",
-    icon_night: "wi-night-snowflake-cold.svg",
+    icon_day: "wi-snowflake-cold.svg",
+    icon_night: "wi-snowflake-cold.svg",
   },
   {
     code: 36,
@@ -256,8 +256,8 @@ const weatherIcons = [
   {
     code: 42,
     description: "Blowing dust or sand",
-    icon_day: "wi-day-sandstorm.svg",
-    icon_night: "wi-night-sandstorm.svg",
+    icon_day: "wi-sandstorm.svg",
+    icon_night: "wi-sandstorm.svg",
   },
   {
     code: 43,
@@ -268,14 +268,14 @@ const weatherIcons = [
   {
     code: 44,
     description: "Tornado or waterspout",
-    icon_day: "wi-day-hurricane.svg",
-    icon_night: "wi-night-hurricane.svg",
+    icon_day: "wi-tornado.svg",
+    icon_night: "wi-tornado.svg",
   },
   {
     code: 45,
     description: "Hurricane",
-    icon_day: "wi-day-hurricane.svg",
-    icon_night: "wi-night-hurricane.svg",
+    icon_day: "wi-hurricane.svg",
+    icon_night: "wi-hurricane.svg",
   },
   {
     code: 46,
@@ -286,14 +286,14 @@ const weatherIcons = [
   {
     code: 47,
     description: "Dust or sand",
-    icon_day: "wi-day-dust.svg",
-    icon_night: "wi-night-dust.svg",
+    icon_day: "wi-dust.svg",
+    icon_night: "wi-dust.svg",
   },
   {
     code: 48,
     description: "Dust storm",
-    icon_day: "wi-day-sandstorm.svg",
-    icon_night: "wi-night-sandstorm.svg",
+    icon_day: "wi-sandstorm.svg",
+    icon_night: "wi-sandstorm.svg",
   },
   {
     code: 49,
@@ -305,37 +305,37 @@ const weatherIcons = [
     code: 50,
     description: "Light winds",
     icon_day: "wi-day-light-wind.svg",
-    icon_night: "wi-night-light-wind.svg",
+    icon_night: "wi-windy.svg",
   },
   {
     code: 51,
     description: "Moderate winds",
-    icon_day: "wi-day-light-wind.svg",
-    icon_night: "wi-night-light-wind.svg",
+    icon_day: "wi-strong-wind.svg",
+    icon_night: "wi-strong-wind.svg",
   },
   {
     code: 52,
     description: "Strong winds",
-    icon_day: "wi-day-windy.svg",
-    icon_night: "wi-night-windy.svg",
+    icon_day: "wi-small-craft-advisory.svg",
+    icon_night: "wi-small-craft-advisory.svg",
   },
   {
     code: 53,
     description: "Gale force winds",
-    icon_day: "wi-day-windy.svg",
-    icon_night: "wi-night-windy.svg",
+    icon_day: "wi-gale-warning.svg",
+    icon_night: "wi-gale-warning.svg",
   },
   {
     code: 54,
     description: "Storm force winds",
-    icon_day: "wi-day-windy.svg",
-    icon_night: "wi-night-windy.svg",
+    icon_day: "wi-storm-warning.svg",
+    icon_night: "wi-storm-warning.svg",
   },
   {
     code: 55,
     description: "Hurricane force winds",
-    icon_day: "wi-day-hurricane-warning.svg",
-    icon_night: "wi-night-hurricane-warning.svg",
+    icon_day: "wi-hurricane-warning.svg",
+    icon_night: "wi-hurricane-warning.svg",
   },
   {
     code: 56,
@@ -358,8 +358,8 @@ const weatherIcons = [
   {
     code: 59,
     description: "Calm conditions",
-    icon_day: "wi-day-calm.svg",
-    icon_night: "wi-night-calm.svg",
+    icon_day: "wi-day-sunny.svg",
+    icon_night: "wi-night-clear.svg",
   },
   {
     code: 60,
@@ -413,7 +413,7 @@ const weatherIcons = [
     code: 68,
     description: "Light fog or haze",
     icon_day: "wi-day-haze.svg",
-    icon_night: "wi-night-haze.svg",
+    icon_night: "wi-fog.svg",
   },
   {
     code: 69,
@@ -556,8 +556,8 @@ const weatherIcons = [
   {
     code: 92,
     description: "High surf warning",
-    icon_day: "wi-surfing.svg",
-    icon_night: "wi-surfing.svg",
+    icon_day: "wi-tsunami.svg",
+    icon_night: "wi-tsunami.svg",
   },
   {
     code: 93,
