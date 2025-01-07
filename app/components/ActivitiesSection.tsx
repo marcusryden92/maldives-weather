@@ -42,7 +42,7 @@ const activities = [
 
 export const ActivitiesSection = () => {
   return (
-    <div className="space-y-8 px-4 max-w-7xl mx-auto">
+    <div className="space-y-8 max-w-7xl mx-auto">
       <div className="text-center space-y-4">
         <span className="text-sm font-medium text-accent bg-accent/10 px-4 py-1 rounded-full">
           Experiences

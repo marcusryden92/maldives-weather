@@ -138,7 +138,7 @@ const Index = () => {
     <>
       <Header />
       <div className="min-h-screen bg-gradient-to-br from-accent/20 via-primary/20 to-accent/20">
-        <div className="w-full px-4 py-12">
+        <div className="w-full px-8 py-12">
           <div className="space-y-12 pt-16">
             {/* Enhanced Header Section */}
             <div className="text-center space-y-6 max-w-4xl mx-auto">
@@ -186,11 +186,11 @@ const Index = () => {
                 </Select>
               </div>
             </div>
-            <div className="flex  px-4 w-full max-w-7xl mx-auto">
-              <div className="flex flex-col justify-between w-[80%] h-auto">
+            <div className="flex flex-col lg:flex-row gap-8  w-full max-w-7xl mx-auto">
+              <div className="flex flex-col justify-between gap-4 lg:w-[80%] h-auto">
                 {/* Weather Card */}
-                <div className="flex justify-center px-4">
-                  <div className="w-full max-w-4xl">
+                <div className="flex justify-center">
+                  <div className="w-full ">
                     {weatherDataObject &&
                     weatherDataObject.forecast.length > 0 ? (
                       <WeatherCard
@@ -210,7 +210,7 @@ const Index = () => {
                 </div>
 
                 {/* Weather Metrics */}
-                <div className="w-full mx-auto px-4">
+                <div className="w-full mx-auto">
                   <WeatherMetrics metrics={metrics} />
                 </div>
               </div>
@@ -269,7 +269,7 @@ const Index = () => {
             </div>
 
             {/* Weather Forecast */}
-            <div className="space-y-8 px-4 w-full max-w-7xl mx-auto">
+            <div className="space-y-8 w-full max-w-7xl mx-auto">
               <div className="flex flex-col items-center gap-4">
                 <h2 className="text-3xl font-semibold text-center text-accent drop-shadow-md">
                   Weather Forecast

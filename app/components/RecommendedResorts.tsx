@@ -53,7 +53,7 @@ export const RecommendedResorts = () => {
   const currentMonth = new Date().toLocaleString("default", { month: "long" });
 
   return (
-    <div className="space-y-8 px-4 py-12 max-w-7xl mx-auto">
+    <div className="space-y-8 py-12 max-w-7xl mx-auto">
       <div className="text-center space-y-4">
         <span className="text-sm font-medium text-accent bg-accent/10 px-4 py-1 rounded-full">
           Where to Stay

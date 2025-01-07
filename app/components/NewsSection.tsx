@@ -85,7 +85,7 @@ export const NewsSection = ({
   const displayedNews = limit ? newsItems.slice(0, limit) : newsItems;
 
   return (
-    <div className="space-y-8 px-4 max-w-7xl mx-auto">
+    <div className="space-y-8 max-w-7xl mx-auto">
       <div className="flex justify-between items-center">
         <h2 className="text-3xl font-semibold text-accent drop-shadow-md">
           Latest News
