@@ -14,23 +14,23 @@ export const WeatherCardSkeleton = ({
   return (
     <Card
       className={cn(
-        "bg-gray-200 p-8 border-none shadow-lg overflow-hidden relative bg-gradient-to-br from-gray-200 to-gray-300 animate-pulse",
+        "bg-slate-200 p-8 border-none shadow-lg overflow-hidden relative bg-gradient-to-br from-slate-200 to-slate-300 animate-pulse",
         className
       )}
       style={style}
     >
       <div className="flex flex-col items-center space-y-6">
         {/* Day text skeleton */}
-        <div className="h-6 w-20 bg-gray-300 rounded-md" />
+        <div className="h-6 w-20 bg-slate-300 rounded-md" />
 
         {/* Weather icon skeleton */}
-        <div className="rounded-full p-4 bg-gray-300 w-24 h-24" />
+        <div className="rounded-full p-4 bg-slate-300 w-24 h-24" />
 
         {/* Temperature skeleton */}
-        <div className="h-10 w-32 bg-gray-300 rounded-md" />
+        <div className="h-10 w-32 bg-slate-300 rounded-md" />
 
         {/* Description skeleton */}
-        <div className="h-6 w-40 bg-gray-300 rounded-md" />
+        <div className="h-6 w-40 bg-slate-300 rounded-md" />
       </div>
     </Card>
   );
