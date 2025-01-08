@@ -1,9 +1,11 @@
 - Previous Forecasts
-- Fix icon issues
 - Meta tags
-- Book now buttons to point to maldivescamping.com and resorts respecitively
+
+- Book now buttons to point to maldivescamping.com and resorts respectively
 - Book now buttons hover effect
-- Landing page layout and clean-up
+
 - News API/CMS
+
+- Landing page layout and clean-up
 - Color scheme
 - Responsiveness
