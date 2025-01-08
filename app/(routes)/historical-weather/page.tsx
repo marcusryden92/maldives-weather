@@ -211,7 +211,7 @@ const Forecast = () => {
                         />
                       </div>
                       <div
-                        className={`mt-2 ${
+                        className={`flex flex-col flex-1 mt-2 ${
                           new Date(date.time).getMonth().toString() ===
                           selectedMonth
                             ? ""
@@ -221,7 +221,7 @@ const Forecast = () => {
                         <span className="text-2xl font-bold">
                           {date.temperatureMax}&deg;C
                         </span>
-                        <p className="text-sm  mt-1 h-[2rem]">
+                        <p className="flex-1 text-xs mt-2">
                           {
                             getWeatherCode(Number(date.weatherCode))
                               ?.description
