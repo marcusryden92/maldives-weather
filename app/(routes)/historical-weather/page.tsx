@@ -21,6 +21,8 @@ import {
 import { getCurrentYear, convertDateFormat } from "@/utils/formatting";
 import { getWeatherCode } from "@/utils/weatherHelpers";
 
+import HistoricalSkeleton from "./HistoricalSkeleton";
+
 const Forecast = () => {
   const [selectedLocation, setSelectedLocation] = useState<string>("male");
 
@@ -169,60 +171,67 @@ const Forecast = () => {
                   {day}
                 </div>
               ))}
-              {weatherDataObject?.historicalData.map((date) => {
-                return (
-                  <div
-                    key={date.time}
-                    className={`h-42 w-42 p-4 rounded-lg border-2 border-neutral-800  ${
-                      new Date(date.time).getMonth().toString() ===
-                      selectedMonth
-                        ? "bg-slate-100"
-                        : "bg-slate-200 border-opacity-50"
-                    } `}
-                  >
+              {!weatherDataObject ? (
+                <HistoricalSkeleton />
+              ) : (
+                weatherDataObject?.historicalData.map((date) => {
+                  return (
                     <div
-                      className={`flex items-center justify-between ${
+                      key={date.time}
+                      className={`h-[10.5rem] w-[10rem] p-4 rounded-lg border-2 border-neutral-800  ${
                         new Date(date.time).getMonth().toString() ===
                         selectedMonth
-                          ? ""
-                          : "opacity-50"
-                      }`}
+                          ? "bg-slate-100"
+                          : "bg-slate-200 border-opacity-50"
+                      } `}
                     >
-                      <span className="text-lg font-medium">
-                        {convertDateFormat(date.time)}
-                      </span>
-                      {}
-                      <Image
-                        src={`/weather-icons/${
-                          getWeatherCode(Number(date.weatherCode))?.icon_day
+                      <div
+                        className={`flex items-center justify-between ${
+                          new Date(date.time).getMonth().toString() ===
+                          selectedMonth
+                            ? ""
+                            : "opacity-50"
                         }`}
-                        alt={
-                          getWeatherCode(Number(date.weatherCode))
-                            ?.description || "Weather icon"
-                        }
-                        width={50}
-                        height={50}
-                        priority={true}
-                      />
+                      >
+                        <span className="text-lg font-medium">
+                          {convertDateFormat(date.time)}
+                        </span>
+                        {}
+                        <Image
+                          src={`/weather-icons/${
+                            getWeatherCode(Number(date.weatherCode))?.icon_day
+                          }`}
+                          alt={
+                            getWeatherCode(Number(date.weatherCode))
+                              ?.description || "Weather icon"
+                          }
+                          width={50}
+                          height={50}
+                          priority={true}
+                        />
+                      </div>
+                      <div
+                        className={`mt-2 ${
+                          new Date(date.time).getMonth().toString() ===
+                          selectedMonth
+                            ? ""
+                            : "opacity-50"
+                        }`}
+                      >
+                        <span className="text-2xl font-bold">
+                          {date.temperatureMax}&deg;C
+                        </span>
+                        <p className="text-sm  mt-1 h-[2rem]">
+                          {
+                            getWeatherCode(Number(date.weatherCode))
+                              ?.description
+                          }
+                        </p>
+                      </div>
                     </div>
-                    <div
-                      className={`mt-2 ${
-                        new Date(date.time).getMonth().toString() ===
-                        selectedMonth
-                          ? ""
-                          : "opacity-50"
-                      }`}
-                    >
-                      <span className="text-2xl font-bold">
-                        {date.temperatureMax}&deg;C
-                      </span>
-                      <p className="text-sm  mt-1 h-[2rem]">
-                        {getWeatherCode(Number(date.weatherCode))?.description}
-                      </p>
-                    </div>
-                  </div>
-                );
-              })}
+                  );
+                })
+              )}
             </div>
           </div>
         </div>

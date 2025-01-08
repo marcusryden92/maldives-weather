@@ -1,4 +1,3 @@
-- Previous Forecasts
 - Meta tags
 
 - Book now buttons to point to maldivescamping.com and resorts respectively
