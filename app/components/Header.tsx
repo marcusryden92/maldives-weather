@@ -44,6 +44,17 @@ const Header = () => {
                 <NavigationMenuItem>
                   <NavigationMenuLink asChild>
                     <Link
+                      href="/historical-weather"
+                      className="group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-white transition-colors hover:bg-accent/50 hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+                    >
+                      Historical Weather
+                    </Link>
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
+
+                <NavigationMenuItem>
+                  <NavigationMenuLink asChild>
+                    <Link
                       href="/news"
                       className="group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-white transition-colors hover:bg-accent/50 hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50"
                     >

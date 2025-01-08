@@ -1,7 +1,7 @@
 import { HourlyWeatherData } from "@/lib/weatherData";
 
 import { formatHourString } from "@/utils/formatting";
-import { getWeatherCode } from "@/utils/weatherHelpers";
+import { getWeatherCode, getWeatherIcon } from "@/utils/weatherHelpers";
 
 import Image from "next/image";
 
@@ -10,12 +10,6 @@ interface HourlyWeatherProps {
   backgroundImage: string;
   hourlyData: HourlyWeatherData[];
 }
-
-const getWeatherIcon = (weatherCode: number, time: string) => {
-  const isDay =
-    new Date(time).getHours() >= 6 && new Date(time).getHours() < 18;
-  return getWeatherCode(weatherCode)?.[isDay ? "icon_day" : "icon_night"];
-};
 
 export const HourlyWeather = ({
   day,
@@ -65,7 +59,9 @@ export const HourlyWeather = ({
               />
             </div>
             <div className="mt-2">
-              <span className="text-2xl font-bold">{hour.temperature}</span>
+              <span className="text-2xl font-bold">
+                {hour.temperature}&deg;C
+              </span>
               <p className="text-sm text-muted-foreground mt-1">
                 {getWeatherCode(Number(hour.weatherCode))?.description}
               </p>

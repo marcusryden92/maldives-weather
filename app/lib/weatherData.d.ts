@@ -3,12 +3,16 @@ export type WeatherData = {
   weekday: string; // Day of the week (e.g., "Monday", "Tuesday")
   weatherCode: number; // Numeric weather code (this will depend on how weather codes are structured)
   temperatureMax: number; // Max temperature, as a string because it’s fixed with .toFixed()
-  temperatureMin: number; // Min temperature, as a number
-  uvIndex: number; // Max UV index, a number
-  windSpeedMax: number; // Max wind speed, a number
+  temperatureMin?: number; // Min temperature, as a number
+  uvIndex?: number; // Max UV index, a number
+  windSpeedMax?: number; // Max wind speed, a number
 };
 
 export type WeatherDataArray = WeatherData[];
+
+export type HistoricalData = {
+  time: string;
+};
 
 export type CurrentWeatherData = {
   time: Date; // Assuming `weatherData.current.time` is a Date object
@@ -31,6 +35,7 @@ export type WeatherDataObject = {
   hourlyForecast: HourlyWeatherData[][];
   forecast: WeatherDataArray;
 };
+
 export type LocationType = "male" | "addu" | "maafushi" | "fuvahmulah";
 
 export type VariableWithValues = {

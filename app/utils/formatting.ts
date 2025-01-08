@@ -12,3 +12,8 @@ export function convertDateFormat(dateStr: string): string {
   const month = date.getMonth() + 1; // getMonth() returns 0-indexed month
   return `${day}/${month}`;
 }
+
+export function getCurrentYear(): number {
+  const currentYear: number = new Date().getFullYear();
+  return currentYear;
+}
