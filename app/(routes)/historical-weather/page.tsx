@@ -99,6 +99,8 @@ const Forecast = () => {
     getWeather();
   }, [selectedLocation, selectedMonth, selectedYear]);
 
+  useEffect(() => {}, []);
+
   return (
     <>
       <Header />

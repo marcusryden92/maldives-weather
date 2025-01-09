@@ -15,17 +15,7 @@ import fetchTwoWeekForecastAction from "@/actions/fetchTwoWeekForecast";
 
 import { WeatherCardSkeleton } from "@/components/WeatherCardSkeleton";
 
-import Image from "next/image";
-
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-
-import { Button } from "@/components/ui/button";
+import ResortCard from "@/components/ResortCard";
 
 // Types
 import {
@@ -51,17 +41,19 @@ const Index = () => {
     { label: "Wind Speed", value: "- km/h", icon: "wind" },
     { label: "UV Index", value: "-", icon: "sun" },
   ]);
+
   const currentMonth = new Date().toLocaleString("default", { month: "long" });
 
   const resort = {
     id: 1,
-    name: "Sunsiyam Resort",
+    name: "Sun Siyam Resorts",
     description:
       "Experience luxury overwater villas with stunning sunset views",
     bestMonths: ["January", "February", "March"],
     price: "From $850/night",
     image: "/lovable-uploads/bc91b83b-031c-49dc-bf12-dc893bfd081c.png",
     rating: 4.9,
+    link: "https://www.sunsiyam.com/",
   };
 
   useEffect(() => {
@@ -178,56 +170,7 @@ const Index = () => {
                 </div>
               </div>
               <div>
-                <Card
-                  key={resort.id}
-                  className="overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-accent group"
-                >
-                  <div className="aspect-video relative overflow-hidden">
-                    <div className="relative w-full h-full group">
-                      <Image
-                        src={resort.image}
-                        alt={resort.name}
-                        layout="fill" // Fills the parent container
-                        className="transition-transform duration-500 group-hover:scale-110"
-                      />
-                    </div>
-                    <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full">
-                      <span className="text-accent font-semibold">
-                        ★ {resort.rating}
-                      </span>
-                    </div>
-                  </div>
-                  <CardHeader>
-                    <div className="flex justify-between items-start">
-                      <div>
-                        <CardTitle className="text-xl">{resort.name}</CardTitle>
-                        <CardDescription className="mt-2">
-                          {resort.description}
-                        </CardDescription>
-                      </div>
-                      <span className="font-semibold text-accent whitespace-nowrap">
-                        {resort.price}
-                      </span>
-                    </div>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="flex flex-wrap gap-2">
-                      {resort.bestMonths.map((month) => (
-                        <span
-                          key={month}
-                          className={`text-xs px-3 py-1 rounded-full ${
-                            month === currentMonth
-                              ? "bg-accent text-white"
-                              : "bg-accent/10 text-accent"
-                          }`}
-                        >
-                          {month}
-                        </span>
-                      ))}
-                    </div>
-                    <Button className="w-full">Book Now</Button>
-                  </CardContent>
-                </Card>
+                <ResortCard resort={resort} currentMonth={currentMonth} />
               </div>
             </div>
 

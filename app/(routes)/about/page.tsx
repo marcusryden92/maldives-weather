@@ -34,9 +34,8 @@ const About = () => {
           <Image
             src="/lovable-uploads/cbd5b28b-9ef1-4c05-8503-3c3432b41ccd.png"
             alt="Maldives Beach"
-            layout="intrinsic"
-            width={1200} // Provide the actual width of your image
-            height={800} // Provide the actual height of your image
+            layout="fill"
+            objectFit="cover"
           />
           <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
             <h1 className="text-4xl md:text-5xl font-bold text-white text-center">

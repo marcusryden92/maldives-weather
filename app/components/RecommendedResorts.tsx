@@ -1,33 +1,27 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-
-import Image from "next/image";
+import ResortCard from "./ResortCard";
 
 const resorts = [
   {
     id: 1,
-    name: "Sunsiyam Resort",
+    name: "Sun Siyam Resorts",
     description:
       "Experience luxury overwater villas with stunning sunset views",
     bestMonths: ["January", "February", "March"],
     price: "From $850/night",
     image: "/lovable-uploads/bc91b83b-031c-49dc-bf12-dc893bfd081c.png",
     rating: 4.9,
+    link: "https://www.sunsiyam.com/",
   },
   {
     id: 2,
-    name: "Azure Paradise Resort",
-    description: "Modern overwater villas with sustainable solar technology",
+    name: "Anantara Resort",
+    description:
+      "Escape to an island beach resort in the Maldives fringed by a turquoise lagoon",
     bestMonths: ["April", "May", "June"],
     price: "From $920/night",
-    image: "/lovable-uploads/2339b277-1956-4d89-ba8a-2dd6c45e373a.png",
+    image: "/booking/anantara.webp",
     rating: 4.8,
+    link: "https://www.anantara.com/en/veli-maldives",
   },
   {
     id: 3,
@@ -37,6 +31,7 @@ const resorts = [
     price: "From $780/night",
     image: "/lovable-uploads/d1212b1b-f773-4707-8262-f0f55528a0d4.png",
     rating: 4.7,
+    link: "https://breeze-resort-maldives.themaldiveshotels.com/en/",
   },
   {
     id: 4,
@@ -46,6 +41,7 @@ const resorts = [
     price: "From $890/night",
     image: "/lovable-uploads/c2893ed3-480e-4318-a6e8-b5dfd2c76f89.png",
     rating: 4.8,
+    link: "https://gili-lankanfushi.com/maldives-luxury-resort/island-view-crusoe-residence/",
   },
 ];
 
@@ -63,62 +59,17 @@ export const RecommendedResorts = () => {
         </h2>
         <p className="text-muted-foreground max-w-2xl mx-auto">
           Discover our carefully curated selection of luxury resorts, perfectly
-          matched to each season&apos;s weather patterns
+          matched to each season's weather patterns
         </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {resorts.map((resort) => (
-          <Card
+          <ResortCard
             key={resort.id}
-            className="overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-accent group"
-          >
-            <div className="aspect-video relative overflow-hidden">
-              <div className="relative w-full h-full group">
-                <Image
-                  src={resort.image}
-                  alt={resort.name}
-                  layout="fill" // Fills the parent container
-                  className="transition-transform duration-500 group-hover:scale-110"
-                />
-              </div>
-              <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full">
-                <span className="text-accent font-semibold">
-                  ★ {resort.rating}
-                </span>
-              </div>
-            </div>
-            <CardHeader>
-              <div className="flex justify-between items-start">
-                <div>
-                  <CardTitle className="text-xl">{resort.name}</CardTitle>
-                  <CardDescription className="mt-2">
-                    {resort.description}
-                  </CardDescription>
-                </div>
-                <span className="font-semibold text-accent whitespace-nowrap">
-                  {resort.price}
-                </span>
-              </div>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex flex-wrap gap-2">
-                {resort.bestMonths.map((month) => (
-                  <span
-                    key={month}
-                    className={`text-xs px-3 py-1 rounded-full ${
-                      month === currentMonth
-                        ? "bg-accent text-white"
-                        : "bg-accent/10 text-accent"
-                    }`}
-                  >
-                    {month}
-                  </span>
-                ))}
-              </div>
-              <Button className="w-full">Book Now</Button>
-            </CardContent>
-          </Card>
+            resort={resort}
+            currentMonth={currentMonth}
+          />
         ))}
       </div>
     </div>
