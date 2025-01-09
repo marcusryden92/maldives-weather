@@ -79,6 +79,7 @@ const Forecast = () => {
   } | null>(null);
 
   useEffect(() => {
+    setWeatherDataObject(null);
     async function getWeather() {
       const data = await fetchHistoricalDataAction(
         selectedLocation as LocationType,
@@ -182,7 +183,7 @@ const Forecast = () => {
                         new Date(date.time).getMonth().toString() ===
                         selectedMonth
                           ? "bg-slate-100"
-                          : "bg-slate-200 border-opacity-50"
+                          : "bg-slate-200 border-opacity-30"
                       } `}
                     >
                       <div
@@ -190,7 +191,7 @@ const Forecast = () => {
                           new Date(date.time).getMonth().toString() ===
                           selectedMonth
                             ? ""
-                            : "opacity-50"
+                            : "opacity-30"
                         }`}
                       >
                         <span className="text-lg font-medium">
@@ -215,7 +216,7 @@ const Forecast = () => {
                           new Date(date.time).getMonth().toString() ===
                           selectedMonth
                             ? ""
-                            : "opacity-50"
+                            : "opacity-30"
                         }`}
                       >
                         <span className="text-2xl font-bold">
