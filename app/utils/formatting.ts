@@ -17,3 +17,8 @@ export function getCurrentYear(): number {
   const currentYear: number = new Date().getFullYear();
   return currentYear;
 }
+
+export function getCurrentMonth(): number {
+  const currentMonth: number = new Date().getMonth() + 1; // Adding 1 to make it 1-based
+  return currentMonth;
+}

@@ -18,7 +18,11 @@ import {
   SelectContent,
 } from "@/components/ui/select";
 
-import { getCurrentYear, convertDateFormat } from "@/utils/formatting";
+import {
+  getCurrentYear,
+  getCurrentMonth,
+  convertDateFormat,
+} from "@/utils/formatting";
 import { getWeatherCode } from "@/utils/weatherHelpers";
 
 import HistoricalSkeleton from "./HistoricalSkeleton";
@@ -52,6 +56,7 @@ const Forecast = () => {
     "December",
   ];
 
+  const [currentMonth] = useState<number>(getCurrentMonth());
   const [currentYear] = useState<number>(getCurrentYear());
   const [selectedYear, setSelectedYear] = useState<string>(
     (getCurrentYear() - 1).toString()
@@ -153,15 +158,22 @@ const Forecast = () => {
                   <SelectValue placeholder="Select month" />
                 </SelectTrigger>
                 <SelectContent className="bg-white/95 backdrop-blur-md border-white/20">
-                  {months.map((month, index) => (
-                    <SelectItem
-                      key={index}
-                      value={index.toString()}
-                      className="text-gray-800 hover:bg-accent/20 focus:bg-accent/20"
-                    >
-                      {month}
-                    </SelectItem>
-                  ))}
+                  {months.map((month, index) => {
+                    if (
+                      Number(selectedYear) === currentYear &&
+                      index > Number(currentMonth) - 1
+                    )
+                      return null;
+                    return (
+                      <SelectItem
+                        key={index}
+                        value={index.toString()}
+                        className="text-gray-800 hover:bg-accent/20 focus:bg-accent/20"
+                      >
+                        {month}
+                      </SelectItem>
+                    );
+                  })}
                 </SelectContent>
               </Select>
             </div>
@@ -183,7 +195,7 @@ const Forecast = () => {
                         new Date(date.time).getMonth().toString() ===
                         selectedMonth
                           ? "bg-slate-100"
-                          : "bg-slate-200 border-opacity-30"
+                          : "bg-slate-100 border-opacity-30"
                       } `}
                     >
                       <div
