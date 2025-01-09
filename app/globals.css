@@ -53,3 +53,40 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #9b87f5;
 }
+
+.responsive-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(7, auto);
+  gap: 10px; /* Adjust gap as needed */
+}
+
+@media (max-width: 1200px) {
+  .responsive-grid {
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(10, auto);
+  }
+}
+
+@media (max-width: 890px) {
+  .responsive-grid {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(12, auto);
+  }
+}
+
+@media (max-width: 530px) {
+  .responsive-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(15, auto);
+  }
+}
+.hide1200 {
+  display: block;
+}
+
+@media (max-width: 1200px) {
+  .hide1200 {
+    display: none;
+  }
+}

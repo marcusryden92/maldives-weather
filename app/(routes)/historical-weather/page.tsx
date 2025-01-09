@@ -178,9 +178,9 @@ const Forecast = () => {
               </Select>
             </div>
 
-            <div className="grid grid-cols-7  grid-rows-auto max-w-7xl w-full gap-4">
+            <div className="responsive-grid max-w-7xl mx-auto gap-4">
               {weekdays.map((day) => (
-                <div key={day} className="w-full text-center text-xl">
+                <div key={day} className="hide1200 w-full text-center text-xl">
                   {day}
                 </div>
               ))}
