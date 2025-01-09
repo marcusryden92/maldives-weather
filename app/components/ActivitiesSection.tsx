@@ -9,34 +9,31 @@ import { Button } from "@/components/ui/button";
 
 import Image from "next/image";
 
+import Link from "next/link";
+
 const activities = [
   {
     id: 1,
-    title: "Parasailing Adventure",
-    description: "Soar high above the turquoise waters for breathtaking views",
-    price: "From $89",
-    image: "/lovable-uploads/d2fe40f5-f148-4c54-a616-8aaea06360c3.png",
+    title: "Addu Atholhu",
+    description:
+      "Addu Atholhu is a beautiful jewel tucked in the Maldives' southern embrace.",
+    image: "/booking/addu.png.webp",
+    link: "https://maldivescamping.com/addu-atholhu-seenu-atoll/",
   },
   {
     id: 2,
-    title: "Stand-Up Paddleboarding",
-    description: "Explore crystal clear lagoons at your own pace",
-    price: "From $45",
-    image: "/lovable-uploads/4c5fada6-4487-4206-bebe-e154f422a683.png",
+    title: "Male Atholhu",
+    description: "Malé, the heart of the Maldives.",
+    image: "/booking/male.png.webp",
+    link: "https://maldivescamping.com/male-atholhu-kaafu-atoll/",
   },
   {
     id: 3,
-    title: "Snorkeling Adventure",
-    description: "Discover vibrant coral reefs and marine life",
-    price: "From $65",
-    image: "/lovable-uploads/bf7f1589-7df3-4a31-8628-3a4249437e88.png",
-  },
-  {
-    id: 4,
-    title: "Jet Ski Experience",
-    description: "Feel the thrill of riding the waves",
-    price: "From $120",
-    image: "/lovable-uploads/2555de1a-345b-4203-ba61-1938d05ebdea.png",
+    title: "Miladhunmadulu Dhekunuburi",
+    description:
+      "Exemplifies the harmonious coexistence of nature and community. ",
+    image: "/booking/noonu.webp",
+    link: "https://maldivescamping.com/miladhunmadulu-dhekunuburi-noonu-atoll/",
   },
 ];
 
@@ -55,18 +52,19 @@ export const ActivitiesSection = () => {
           vacation truly memorable
         </p>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {activities.map((activity) => (
           <Card
             key={activity.id}
-            className="overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-accent"
+            className="flex flex-col overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-accent"
           >
-            <div className="aspect-video relative overflow-hidden">
+            <div className="flex aspect-video relative overflow-hidden">
               <div className="relative w-full h-full">
                 <Image
                   src={activity.image}
                   alt={activity.title}
                   layout="fill" // This will make the image fill the parent container
+                  objectFit="cover" // Ensures the aspect ratio is maintained while filling the frame
                   className="transition-transform duration-300 hover:scale-105"
                 />
               </div>
@@ -75,12 +73,16 @@ export const ActivitiesSection = () => {
               <CardTitle className="text-lg">{activity.title}</CardTitle>
               <CardDescription>{activity.description}</CardDescription>
             </CardHeader>
-            <CardContent className="flex justify-between items-center">
-              <span className="font-semibold text-accent">
+            <div className="flex flex-1 justify-between items-end p-6 pt-0">
+              {/* <span className="font-semibold text-accent">
                 {activity.price}
-              </span>
-              <Button variant="outline">Book Now</Button>
-            </CardContent>
+              </span> */}
+              <div className="flex flex-1 items-end  ">
+                <Link href={activity.link}>
+                  <Button variant="outline">Book Tour</Button>
+                </Link>
+              </div>
+            </div>
           </Card>
         ))}
       </div>
