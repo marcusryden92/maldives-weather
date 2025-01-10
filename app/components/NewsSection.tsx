@@ -12,7 +12,6 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import Image from "next/image";
 
 interface NewsSectionProps {
   limit?: number;
@@ -55,8 +54,6 @@ export const NewsSection = ({
     async function fetchAndSetNews() {
       const data = await getNews();
       setNewsData(data); // Set the 'data' part of the response directly
-
-      console.log(data);
     }
 
     fetchAndSetNews();
