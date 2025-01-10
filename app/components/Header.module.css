@@ -1,0 +1,13 @@
+@keyframes rotateSwing {
+  0%,
+  100% {
+    transform: rotate(-30deg);
+  }
+  50% {
+    transform: rotate(30deg);
+  }
+}
+
+.pulsateRotate {
+  animation: rotateSwing 8s ease-in-out infinite;
+}

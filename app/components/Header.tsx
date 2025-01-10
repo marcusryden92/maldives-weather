@@ -1,5 +1,6 @@
 import { Sun } from "lucide-react";
 import Link from "next/link";
+import styles from "./Header.module.css";
 
 import {
   NavigationMenu,
@@ -15,7 +16,9 @@ const Header = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <Sun className="h-8 w-8 text-white animate-pulse" />
+            <Sun
+              className={`h-8 w-8 ${styles.pulsateRotate} text-yellow-300 `}
+            />
             <span className="text-2xl font-bold text-white">
               Weather Maldives
             </span>

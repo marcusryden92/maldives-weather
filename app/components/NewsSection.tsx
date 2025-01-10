@@ -27,16 +27,6 @@ interface NewsItem {
   image_url: string;
 }
 
-interface NewsResponse {
-  meta: {
-    found: number;
-    returned: number;
-    limit: number;
-    page: number;
-  };
-  data: NewsItem[];
-}
-
 export const NewsSection = ({
   limit,
   showViewAll = true,
@@ -69,7 +59,9 @@ export const NewsSection = ({
     return []; // Return an empty array if no data is available
   }
 
-  return (
+  return !displayedNews || displayedNews.length === 0 ? (
+    <div className="text-2xl text-accent w-full text-center">Loading...</div>
+  ) : (
     <div className="space-y-8 max-w-7xl mx-auto">
       <div className="flex justify-between items-center">
         <h2 className="text-3xl font-semibold text-accent drop-shadow-md">
