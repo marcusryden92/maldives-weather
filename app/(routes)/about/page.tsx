@@ -34,6 +34,7 @@ const About = () => {
           <Image
             src="/lovable-uploads/cbd5b28b-9ef1-4c05-8503-3c3432b41ccd.png"
             alt="Maldives Beach"
+            fill
             style={{ objectFit: "cover" }}
           />
           <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
@@ -58,40 +59,6 @@ const About = () => {
             helping you plan your perfect Maldivian experience.
           </p>
         </div>
-
-        {/* Stats Section */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-          <Card className="p-6 text-center">
-            <h3 className="text-3xl font-bold text-accent mb-2">98%</h3>
-            <p className="text-muted-foreground">Forecast Accuracy</p>
-          </Card>
-          <Card className="p-6 text-center">
-            <h3 className="text-3xl font-bold text-accent mb-2">1.2M+</h3>
-            <p className="text-muted-foreground">Monthly Users</p>
-          </Card>
-          <Card className="p-6 text-center">
-            <h3 className="text-3xl font-bold text-accent mb-2">200+</h3>
-            <p className="text-muted-foreground">Weather Stations</p>
-          </Card>
-        </div>
-
-        {/* Graph Section */}
-        <Card className="p-6 mb-16">
-          <h2 className="text-2xl font-semibold mb-6 text-center">
-            Monthly Visitor Statistics
-          </h2>
-          <div className="h-[400px] w-full">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={visitorData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="month" />
-                <YAxis />
-                <Tooltip />
-                <Bar dataKey="visitors" fill="#9b87f5" />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-        </Card>
 
         {/* Mission Statement */}
         <div className="max-w-3xl mx-auto text-center">
