@@ -2,12 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { LocationType, WeatherData } from "@/lib/weatherData";
-
 import fetchHistoricalDataAction from "@/actions/fetchHistoricalData";
-
-// import { WeatherCard } from "@/components/WeatherCard";
 import Header from "@/components/Header";
-
 import Image from "next/image";
 
 import {
@@ -37,8 +33,14 @@ const Forecast = () => {
     { id: "fuvahmulah", name: "Fuvahmulah" },
   ];
 
+  const [currentMonth] = useState<number>(getCurrentMonth());
+  const [currentYear] = useState<number>(getCurrentYear());
+
   const [selectedMonth, setSelectedMonth] = useState(
-    new Date().getMonth().toString()
+    (currentMonth - 1).toString()
+  );
+  const [selectedYear, setSelectedYear] = useState<string>(
+    (currentYear - 1).toString()
   );
 
   const months = [
@@ -55,12 +57,6 @@ const Forecast = () => {
     "November",
     "December",
   ];
-
-  const [currentMonth] = useState<number>(getCurrentMonth());
-  const [currentYear] = useState<number>(getCurrentYear());
-  const [selectedYear, setSelectedYear] = useState<string>(
-    (getCurrentYear() - 1).toString()
-  );
 
   const years = [
     currentYear - 3,
@@ -84,7 +80,19 @@ const Forecast = () => {
   } | null>(null);
 
   useEffect(() => {
+    // Reset weatherDataObject when selections change
     setWeatherDataObject(null);
+
+    // If we're in current year and selected month is beyond current month,
+    // automatically set it to current month
+    if (
+      Number(selectedYear) === currentYear &&
+      Number(selectedMonth) > currentMonth - 1
+    ) {
+      setSelectedMonth((currentMonth - 1).toString());
+      return; // Return early to prevent double fetch
+    }
+
     async function getWeather() {
       const data = await fetchHistoricalDataAction(
         selectedLocation as LocationType,
@@ -97,16 +105,20 @@ const Forecast = () => {
     }
 
     getWeather();
-  }, [selectedLocation, selectedMonth, selectedYear]);
-
-  useEffect(() => {}, []);
+  }, [
+    selectedLocation,
+    selectedMonth,
+    selectedYear,
+    currentMonth,
+    currentYear,
+  ]);
 
   return (
     <>
       <Header />
 
       <div className="min-h-screen bg-gradient-to-br from-accent/20 via-primary/20 to-accent/20">
-        <div className="flex flex-col items-center w-full  px-4 py-12">
+        <div className="flex flex-col items-center w-full px-4 py-12">
           <div className="flex flex-col max-w-7xl space-y-12 pt-16">
             {/* Header Section */}
             <div className="text-center space-y-6 max-w-4xl mx-auto">
@@ -163,7 +175,7 @@ const Forecast = () => {
                   {months.map((month, index) => {
                     if (
                       Number(selectedYear) === currentYear &&
-                      index > Number(currentMonth) - 1
+                      index > currentMonth - 1
                     )
                       return null;
                     return (
@@ -211,7 +223,6 @@ const Forecast = () => {
                         <span className="text-lg font-medium">
                           {convertDateFormat(date.time)}
                         </span>
-                        {}
                         <Image
                           src={`/weather-icons/${
                             getWeatherCode(Number(date.weatherCode))?.icon_day
