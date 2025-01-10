@@ -61,9 +61,10 @@ export const ActivitiesSection = () => {
               <div className="relative w-full h-full">
                 <Image
                   src={activity.image}
+                  fill
                   alt={activity.title}
-                  layout="fill" // This will make the image fill the parent container
-                  objectFit="cover" // Ensures the aspect ratio is maintained while filling the frame
+                  style={{ objectFit: "cover" }}
+                  // Ensures the aspect ratio is maintained while filling the frame
                   className="transition-transform duration-300 hover:scale-105"
                 />
               </div>

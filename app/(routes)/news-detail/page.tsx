@@ -47,7 +47,8 @@ const NewsDetail = () => {
               <Image
                 src={newsItem.image}
                 alt={newsItem.title}
-                layout="intrinsic"
+                fill
+                style={{ objectFit: "cover" }}
                 width={1200} // Provide an approximate width or use a reasonable value
                 height={800} // Provide an approximate height or use a reasonable value
               />

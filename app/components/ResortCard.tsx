@@ -36,7 +36,8 @@ const ResortCard: React.FC<ResortCardProps> = ({ resort, currentMonth }) => {
           <Image
             src={image}
             alt={name}
-            layout="fill"
+            fill
+            style={{ objectFit: "cover" }}
             className="transition-transform duration-500 group-hover:scale-110"
           />
         </div>

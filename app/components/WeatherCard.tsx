@@ -76,7 +76,7 @@ export const WeatherCard = ({
           <span className="text-lg font-medium">
             {day} {date}
           </span>
-          <div className="rounded-full p-4 bg-white/20 group-hover:scale-110 transition-transform duration-300">
+          <div className="rounded-full p-4 bg-whitobe/20 group-hover:scale-110 transition-transform duration-300">
             <Image
               src={`/weather-icons/${codeData?.icon_day}`}
               alt={codeData?.description || "Weather icon"}

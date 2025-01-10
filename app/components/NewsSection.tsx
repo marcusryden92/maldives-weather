@@ -111,7 +111,8 @@ export const NewsSection = ({
                   <Image
                     src={news.image}
                     alt={news.title}
-                    layout="fill" // Fills the parent container with the image
+                    fill
+                    style={{ objectFit: "cover" }}
                     className="transition-transform duration-300 hover:scale-105"
                   />
                 </div>
