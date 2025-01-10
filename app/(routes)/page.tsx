@@ -82,13 +82,7 @@ const Index = () => {
         },
         {
           label: "UV Index",
-          value:
-            weatherDataObject &&
-            weatherDataObject.forecast &&
-            weatherDataObject.forecast[0] &&
-            weatherDataObject.forecast[0].uvIndex
-              ? weatherDataObject.forecast[0].uvIndex?.toString()
-              : "N/A",
+          value: weatherDataObject?.forecast?.[0]?.uvIndex?.toString() || "N/A",
           icon: "sun",
         },
       ];
