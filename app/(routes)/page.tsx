@@ -132,7 +132,7 @@ const Index = () => {
               </div>
             </div>
             {/* Location and Month Selection */}
-            <div className="flex flex-col md:flex-row justify-center gap-4 max-w-4xl mx-auto">
+            <div className="flex flex-col  justify-center gap-4 max-w-4xl mx-auto">
               <div className="flex gap-4 backdrop-blur-md  p-6 rounded-xl ">
                 <LocationSelector
                   selectedLocation={selectedLocation}
@@ -169,7 +169,7 @@ const Index = () => {
                   <WeatherMetrics metrics={metrics} />
                 </div>
               </div>
-              <div>
+              <div className="hidden lg:flex">
                 <ResortCard resort={resort} currentMonth={currentMonth} />
               </div>
             </div>
@@ -195,7 +195,7 @@ const Index = () => {
                 </ToggleGroup>
               </div>
 
-              <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-7xl mx-auto">
+              <div className="w-full grid grid-cols-2 lg:grid-cols-5 gap-6 max-w-7xl mx-auto">
                 {visibleForecast && weatherDataObject ? (
                   visibleForecast.map((day: WeatherData, index: number) => (
                     <WeatherCard
@@ -218,6 +218,10 @@ const Index = () => {
                   </>
                 )}
               </div>
+            </div>
+
+            <div className="flex lg:hidden justify-self-center">
+              <ResortCard resort={resort} currentMonth={currentMonth} />
             </div>
 
             {/* News Section */}

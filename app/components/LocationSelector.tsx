@@ -22,7 +22,7 @@ export const LocationSelector: React.FC<LocationSelectorProps> = ({
   };
 
   return (
-    <div className="flex w-full gap-4 animate-fade-in">
+    <div className="grid grid-rows-4 grid-cols-1 sm:grid-rows-2 sm:grid-cols-2 md:grid-rows-1 md:grid-cols-4 w-full gap-4 animate-fade-in">
       {locations.map((location) => (
         <button
           key={location.id}
