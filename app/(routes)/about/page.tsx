@@ -1,27 +1,8 @@
 "use client";
 
-import { Card } from "@/components/ui/card";
 import Header from "@/components/Header";
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-} from "recharts";
 
 import Image from "next/image";
-
-const visitorData = [
-  { month: "Jan", visitors: 15000 },
-  { month: "Feb", visitors: 18000 },
-  { month: "Mar", visitors: 16000 },
-  { month: "Apr", visitors: 21000 },
-  { month: "May", visitors: 19000 },
-  { month: "Jun", visitors: 25000 },
-];
 
 const About = () => {
   return (

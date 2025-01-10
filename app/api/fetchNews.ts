@@ -1,10 +1,17 @@
 "use server";
 
-import { searchString } from "@/lib/search-string";
+// Define types for the response data
+interface NewsItem {
+  // Example fields, modify according to your actual data structure
+  uuid: string;
+  title: string;
+  description: string;
+  image_url: string;
+}
 
 interface NewsResponse {
   // Define the response type based on the API's actual response
-  data: any[];
+  data: NewsItem[];
   meta: {
     found: number;
     returned: number;

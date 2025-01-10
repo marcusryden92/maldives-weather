@@ -27,16 +27,8 @@ export default async function Article({ params }: { params: Params }) {
   }
 
   // Destructure the article data for easier access
-  const {
-    title,
-    description,
-    snippet,
-    url,
-    image_url,
-    published_at,
-    source,
-    categories,
-  } = data;
+  const { title, description, snippet, url, image_url, published_at, source } =
+    data;
 
   // Format the published date
   const formattedDate = new Date(published_at).toLocaleDateString();
