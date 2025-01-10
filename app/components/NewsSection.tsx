@@ -1,3 +1,9 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { fetchNews } from "@/api/fetchNews";
+import { transformToUrlFriendly } from "@/utils/formatting";
+
 import {
   Card,
   CardDescription,
@@ -8,81 +14,63 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
 
-export const newsItems = [
-  {
-    id: 1,
-    title: "Record-Breaking Clear Skies Expected This Weekend",
-    description: "Perfect weather conditions forecasted for outdoor activities",
-    image: "/lovable-uploads/03ba4976-a3ea-4414-b126-f4ec5e1f4b81.png",
-    type: "good",
-  },
-  {
-    id: 2,
-    title: "Storm Warning: Preparation Advisory",
-    description:
-      "Residents advised to take precautions as tropical storm approaches",
-    image: "/lovable-uploads/1b0338be-72df-4827-acd1-367da387ea25.png",
-    type: "bad",
-  },
-  {
-    id: 3,
-    title: "Tourism Boost: Perfect Beach Weather Ahead",
-    description:
-      "Local resorts report surge in bookings due to ideal weather conditions",
-    image: "/lovable-uploads/741e24fe-e665-4e68-90fd-f197a4b36577.png",
-    type: "good",
-  },
-  {
-    id: 4,
-    title: "High Tide Alert: Coastal Areas on Watch",
-    description: "Maritime authorities issue advisory for beach activities",
-    image: "/lovable-uploads/9dab586f-a612-40aa-a336-c440868ea07c.png",
-    type: "bad",
-  },
-  {
-    id: 5,
-    title: "Dramatic Storm Clouds Over Paradise",
-    description:
-      "Photographers capture stunning weather phenomenon over beach resorts",
-    image: "/lovable-uploads/57ebdf38-0f8b-4a9b-aab8-beebb8f9a443.png",
-    type: "good",
-  },
-  {
-    id: 6,
-    title: "Severe Weather Alert: Resort Areas",
-    description:
-      "Water villas and overwater structures secure against incoming weather system",
-    image: "/lovable-uploads/a530ec59-f06a-491a-9f2f-3bef5d5d4114.png",
-    type: "bad",
-  },
-  {
-    id: 7,
-    title: "Luxury Resorts Report Perfect Weather Conditions",
-    description:
-      "Overwater villas experience ideal climate for vacation activities",
-    image: "/lovable-uploads/c20861b9-fd10-4599-b1aa-06873fc107a3.png",
-    type: "good",
-  },
-  {
-    id: 8,
-    title: "Golden Hour Paradise: Weather Perfect for Photography",
-    description:
-      "Sunset seekers flock to overwater villas for perfect weather conditions",
-    image: "/lovable-uploads/202581cb-41b5-4dcf-983a-025f2fc701aa.png",
-    type: "good",
-  },
-];
-
 interface NewsSectionProps {
   limit?: number;
   showViewAll?: boolean;
+}
+
+// Define types for the response data
+interface NewsItem {
+  // Example fields, modify according to your actual data structure
+  uuid: string;
+  title: string;
+  description: string;
+  image_url: string;
+}
+
+interface NewsResponse {
+  meta: {
+    found: number;
+    returned: number;
+    limit: number;
+    page: number;
+  };
+  data: NewsItem[];
 }
 
 export const NewsSection = ({
   limit,
   showViewAll = true,
 }: NewsSectionProps) => {
-  const displayedNews = limit ? newsItems.slice(0, limit) : newsItems;
+  const [newsData, setNewsData] = useState<NewsItem[]>([]);
+  const [displayedNews, setDisplayedNews] = useState<NewsItem[]>([]);
+
+  useEffect(() => {
+    if (newsData) {
+      setDisplayedNews(limit ? newsData.slice(0, limit) : newsData);
+    }
+  }, [newsData]);
+
+  useEffect(() => {
+    async function fetchAndSetNews() {
+      const data = await getNews();
+      setNewsData(data); // Set the 'data' part of the response directly
+
+      console.log(data);
+    }
+
+    fetchAndSetNews();
+  }, []); // Empty array means this effect runs only once, when the component mounts
+
+  async function getNews(): Promise<NewsItem[]> {
+    const response = await fetchNews();
+
+    if (response && response.data) {
+      return response.data; // Extract and return the 'data' part of the response
+    }
+
+    return []; // Return an empty array if no data is available
+  }
 
   return (
     <div className="space-y-8 max-w-7xl mx-auto">
@@ -98,21 +86,23 @@ export const NewsSection = ({
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {displayedNews.map((news) => (
-          <Link href={`/news/${news.id}`} key={news.id}>
+          <Link
+            href={`/news/${news.uuid}/${transformToUrlFriendly(news.title)}`}
+            key={news.uuid}
+          >
             <Card
-              className={`overflow-hidden transition-all duration-300 hover:shadow-lg ${
-                news.type === "good"
-                  ? "hover:border-green-400"
-                  : "hover:border-red-400"
-              }`}
+              className={`overflow-hidden transition-all duration-300 hover:shadow-lg `}
             >
               <div className="aspect-video relative overflow-hidden">
                 <div className="relative w-full h-full">
-                  <Image
-                    src={news.image}
+                  <img
+                    src={news.image_url}
                     alt={news.title}
-                    fill
-                    style={{ objectFit: "cover" }}
+                    style={{
+                      objectFit: "cover",
+                      width: "100%", // or set a fixed width if needed
+                      height: "100%", // or set a fixed height if needed
+                    }}
                     className="transition-transform duration-300 hover:scale-105"
                   />
                 </div>

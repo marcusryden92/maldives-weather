@@ -24,7 +24,6 @@ import {
   LocationType,
   WeatherData,
 } from "@/lib/weatherData";
-import { fetchNews } from "@/api/fetchNews";
 
 const Index = () => {
   const [selectedLocation, setSelectedLocation] =
@@ -67,16 +66,6 @@ const Index = () => {
 
     getWeather();
   }, [selectedLocation]);
-
-  useEffect(() => {
-    async function getNews() {
-      const data = await fetchNews();
-
-      if (data) console.log(data);
-    }
-
-    getNews();
-  }, []);
 
   useEffect(() => {
     if (weatherDataObject) {
