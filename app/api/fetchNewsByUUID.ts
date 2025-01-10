@@ -1,8 +1,17 @@
 "use server";
 
+// Define types for the response data
+interface NewsItem {
+  // Example fields, modify according to your actual data structure
+  uuid: string;
+  title: string;
+  description: string;
+  image_url: string;
+}
+
 interface NewsByUUIDResponse {
   // Define the response type based on the API's actual response
-  data: any; // You can refine this based on the actual data structure
+  data: NewsItem; // You can refine this based on the actual data structure
   error: string | null;
 }
 
