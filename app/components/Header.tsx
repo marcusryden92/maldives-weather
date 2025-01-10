@@ -1,11 +1,6 @@
 import { Sun } from "lucide-react";
 import Link from "next/link";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
+
 import {
   NavigationMenu,
   NavigationMenuItem,

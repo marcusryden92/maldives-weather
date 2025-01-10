@@ -278,8 +278,6 @@ export function getMonthDateRangeWithFullWeeks(
   year: number,
   month: number
 ): { startDate: string; endDate: string } {
-  const today = new Date();
-
   // Get the first and last date of the given month
   const startDate = new Date(year, month, 1);
   const endDate = new Date(year, month + 1, 0); // 0 gives us the last day of the current month

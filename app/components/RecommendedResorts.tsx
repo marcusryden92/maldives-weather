@@ -59,7 +59,7 @@ export const RecommendedResorts = () => {
         </h2>
         <p className="text-muted-foreground max-w-2xl mx-auto">
           Discover our carefully curated selection of luxury resorts, perfectly
-          matched to each season's weather patterns
+          matched to each season&apos;s weather patterns
         </p>
       </div>
 
