@@ -7,6 +7,10 @@ interface NewsItem {
   title: string;
   description: string;
   image_url: string;
+  snippet: string;
+  url: string;
+  published_at: string | Date;
+  source: string;
 }
 
 interface NewsByUUIDResponse {
@@ -42,7 +46,7 @@ export async function fetchNewsByUUID(
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    const data: NewsByUUIDResponse = await response.json();
+    const data: NewsItem = await response.json();
     return { data, error: null };
   } catch (error) {
     console.error("Error fetching news by UUID:", error);

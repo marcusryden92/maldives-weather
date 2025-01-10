@@ -26,6 +26,8 @@ export default async function Article({ params }: { params: Params }) {
     return <div className="text-center text-gray-500">Article not found</div>;
   }
 
+  console.log(data);
+
   // Destructure the article data for easier access
   const { title, description, snippet, url, image_url, published_at, source } =
     data;

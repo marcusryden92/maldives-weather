@@ -7,6 +7,10 @@ interface NewsItem {
   title: string;
   description: string;
   image_url: string;
+  snippet: string;
+  url: string;
+  published_at: string | Date;
+  source: string;
 }
 
 interface NewsResponse {
