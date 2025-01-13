@@ -17,6 +17,8 @@ import { getWeatherCode } from "@/utils/weatherHelpers";
 
 import { convertDateFormat } from "@/utils/formatting";
 
+import { LuExternalLink } from "react-icons/lu";
+
 interface WeatherCardProps {
   day: string;
   time: string;
@@ -76,6 +78,7 @@ export const WeatherCard = ({
         onClick={() => setIsDialogOpen(true)}
       >
         <div className="absolute inset-0 bg-black/30 backdrop-blur-[2px] transition-all duration-300 group-hover:backdrop-blur-0 group-hover:bg-black/20" />
+        <LuExternalLink className="absolute group top-3 right-3 text-white w-6 h-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         <div
           className={`relative z-10 flex flex-col items-center ${
             mainCard ? "space-y-4 lg:space-y-6" : "md:space-y-6"
