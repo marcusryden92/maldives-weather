@@ -119,14 +119,14 @@ const Index = () => {
                 <p className="text-xl text-muted-foreground max-w-2xl mx-auto font-light">
                   Experience paradise through our detailed weather forecasts
                 </p>
-                <p className="text-base text-muted-foreground/80 max-w-3xl mx-auto">
+                {/*  <p className="text-base text-muted-foreground/80 max-w-3xl mx-auto">
                   Stay informed with real-time weather updates, accurate
                   forecasts, and essential travel insights for the Maldives.
                   Whether you&apos;re planning a beach vacation, water sports
                   activities, or simply exploring the islands, we provide
                   comprehensive weather information to help you make the most of
                   your Maldivian experience.
-                </p>
+                </p> */}
               </div>
             </div>
             {/* Location and Month Selection */}
@@ -155,6 +155,7 @@ const Index = () => {
                         hourlyData={weatherDataObject.hourlyForecast[0]}
                         className="transform hover:scale-105 transition-all duration-300"
                         index={1}
+                        mainCard
                       />
                     ) : (
                       <WeatherCardSkeleton />

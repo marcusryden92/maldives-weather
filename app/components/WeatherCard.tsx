@@ -14,7 +14,6 @@ import { HourlyWeather } from "./HourlyWeather";
 import { HourlyWeatherData } from "@/lib/weatherData";
 
 import { getWeatherCode } from "@/utils/weatherHelpers";
-import Image from "next/image";
 
 import { convertDateFormat } from "@/utils/formatting";
 
@@ -26,6 +25,7 @@ interface WeatherCardProps {
   className?: string;
   index: number;
   hourlyData: HourlyWeatherData[];
+  mainCard?: boolean;
 }
 
 const backgroundImages = [
@@ -49,6 +49,7 @@ export const WeatherCard = ({
   className,
   index,
   hourlyData,
+  mainCard,
 }: WeatherCardProps) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const imageIndex = (index % (backgroundImages.length - 1)) + 1;
@@ -61,7 +62,10 @@ export const WeatherCard = ({
     <>
       <Card
         className={cn(
-          "h-auto p-8 border-none shadow-lg hover:shadow-xl transition-all duration-300 animate-fade-up overflow-hidden group relative text-white cursor-pointer",
+          "flex flex-col items-center justify-center w-full  h-auto  border-none shadow-lg hover:shadow-xl transition-all duration-300 animate-fade-up overflow-hidden group relative text-white cursor-pointer ",
+          mainCard
+            ? "aspect-auto p-8"
+            : "aspect-square md:aspect-auto p-4 md:p-8",
           className
         )}
         style={{
@@ -72,22 +76,42 @@ export const WeatherCard = ({
         onClick={() => setIsDialogOpen(true)}
       >
         <div className="absolute inset-0 bg-black/30 backdrop-blur-[2px] transition-all duration-300 group-hover:backdrop-blur-0 group-hover:bg-black/20" />
-        <div className="relative z-10 flex flex-col items-center space-y-6">
-          <span className="text-lg font-medium">
+        <div
+          className={`relative z-10 flex flex-col items-center ${
+            mainCard ? "space-y-4 lg:space-y-6" : "md:space-y-6"
+          } `}
+        >
+          <span
+            className={`${
+              mainCard ? "text-lg" : "text-[3vw] md:text-lg"
+            } font-medium`}
+          >
             {day} {date}
           </span>
-          <div className="rounded-full p-4 bg-whitobe/20 group-hover:scale-110 transition-transform duration-300">
-            <Image
+          <div
+            className={`flex flex-col items-center rounded-full ${
+              mainCard ? "p-4" : "md:p-4"
+            }  bg-whitobe/20 group-hover:scale-110 transition-transform duration-300`}
+          >
+            <img
               src={`/weather-icons/${codeData?.icon_day}`}
               alt={codeData?.description || "Weather icon"}
-              width={60}
-              height={60}
-              priority={true}
+              className={`${mainCard ? "w-[80px]" : "w-[10vw] md:w-[60px]"}`}
               style={{ filter: "invert(1)" }} // Inverts color to white
             />
           </div>
-          <span className="text-4xl font-bold">{temperature}&deg;C</span>
-          <span className="text-lg text-white/90 text-center">
+          <span
+            className={`font-bold ${
+              mainCard ? "text-4xl" : "text-[5vw] md:text-4xl "
+            }`}
+          >
+            {temperature}&deg;C
+          </span>
+          <span
+            className={`text-white text-center ${
+              mainCard ? "text-2xl" : "text-[3vw] md:text-xl "
+            }`}
+          >
             {codeData?.description}
           </span>
         </div>

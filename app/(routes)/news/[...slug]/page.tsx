@@ -45,12 +45,13 @@ export default async function Article({ params }: { params: Params }) {
             src={image_url}
             alt={title}
             className="w-full h-auto mb-6 rounded-lg shadow-md"
+            style={{ aspectRatio: "2/1", objectFit: "cover" }} // Correct syntax for inline style in React
           />
         )}
 
         {/* Display article title */}
-        <h1 className="flex justify-between text-3xl font-semibold text-gray-900 mb-4">
-          <span className="truncate">{title}</span>{" "}
+        <h1 className="flex flex-col justify-between text-3xl font-semibold text-gray-900 mb-4 gap-4">
+          <span>{title}</span>{" "}
           <Link href={url}>
             <Button variant={"outline"} className="text-xl">
               Read the full article

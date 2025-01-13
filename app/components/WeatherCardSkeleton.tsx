@@ -14,7 +14,7 @@ export const WeatherCardSkeleton = ({
   return (
     <Card
       className={cn(
-        "bg-slate-200 p-8 border-none shadow-lg overflow-hidden relative bg-gradient-to-br from-slate-200 to-slate-300 animate-pulse",
+        "bg-slate-200 p-8 border-none shadow-lg overflow-hidden relative bg-gradient-to-br from-slate-200 to-slate-300 animate-pulse aspect-square md:aspect-auto",
         className
       )}
       style={style}
@@ -27,10 +27,10 @@ export const WeatherCardSkeleton = ({
         <div className="rounded-full p-4 bg-slate-300 w-24 h-24" />
 
         {/* Temperature skeleton */}
-        <div className="h-10 w-32 bg-slate-300 rounded-md" />
+        <div className="hidden md:block h-10 w-32 bg-slate-300 rounded-md" />
 
         {/* Description skeleton */}
-        <div className="h-6 w-40 bg-slate-300 rounded-md" />
+        <div className="hidden md:block h-6 w-40 bg-slate-300 rounded-md" />
       </div>
     </Card>
   );
