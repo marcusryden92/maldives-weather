@@ -47,6 +47,12 @@ export default async function fetchTwoWeekForecast(
     ],
     timezone: "auto",
     forecast_days: 14,
+    cell_selection: "nearest",
+
+    // models: "ukmo_seamless",
+
+    // models: "bom_access_global",
+    // models: "meteofrance_seamless",
     // models: "cma_grapes_global",
   };
 
