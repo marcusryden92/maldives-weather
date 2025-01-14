@@ -8,12 +8,12 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { HourlyWeather } from "./HourlyWeather";
 
 import { HourlyWeatherData } from "@/lib/weatherData";
 
-import { getWeatherCode } from "@/utils/weatherHelpers";
+import { getWeatherCode } from "@/utils/weatherIconHandlers";
 
 import { convertDateFormat } from "@/utils/formatting";
 
@@ -28,6 +28,9 @@ interface WeatherCardProps {
   index: number;
   hourlyData: HourlyWeatherData[];
   mainCard?: boolean;
+  precipitationSum?: number;
+  precipitationProbabilityMax?: number;
+  windSpeedMax?: number;
 }
 
 const backgroundImages = [
@@ -52,12 +55,28 @@ export const WeatherCard = ({
   index,
   hourlyData,
   mainCard,
+  precipitationSum = 0,
+  precipitationProbabilityMax = 0,
+  windSpeedMax = 0,
 }: WeatherCardProps) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const imageIndex = (index % (backgroundImages.length - 1)) + 1;
 
-  const [codeData] = useState(getWeatherCode(weatherCode)) || "";
+  const [codeData] =
+    useState(
+      getWeatherCode({
+        time: time,
+        weatherCode: weatherCode,
+        precipitationProbability: precipitationProbabilityMax,
+        precipitation: precipitationSum / 20,
+        cloudCover: 0,
+        windSpeed10m: windSpeedMax,
+      })
+    ) || "";
 
+  useEffect(() => {
+    console.log(codeData);
+  }, [codeData]);
   const date = convertDateFormat(time);
 
   return (

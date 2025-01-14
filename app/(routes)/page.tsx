@@ -151,6 +151,16 @@ const Index = () => {
                         temperature={
                           weatherDataObject.forecast[0].temperatureMax
                         }
+                        precipitationSum={
+                          weatherDataObject.forecast[0].precipitationSum
+                        }
+                        precipitationProbabilityMax={
+                          weatherDataObject.forecast[0]
+                            .precipitationProbabilityMax
+                        }
+                        windSpeedMax={
+                          weatherDataObject.forecast[0].windSpeedMax
+                        }
                         weatherCode={weatherDataObject.forecast[0].weatherCode}
                         hourlyData={weatherDataObject.hourlyForecast[0]}
                         className="transform hover:scale-105 transition-all duration-300"
@@ -203,6 +213,11 @@ const Index = () => {
                       time={weatherDataObject.forecast[index].time}
                       temperature={day.temperatureMax}
                       weatherCode={day.weatherCode}
+                      precipitationSum={day.precipitationSum}
+                      precipitationProbabilityMax={
+                        day.precipitationProbabilityMax
+                      }
+                      windSpeedMax={day.windSpeedMax}
                       hourlyData={weatherDataObject.hourlyForecast[index]}
                       className="transform hover:scale-105 transition-all duration-300"
                       index={index + 1}

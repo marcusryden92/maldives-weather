@@ -1,4 +1,4 @@
-"use server";
+// "use server";
 
 import fetchTwoWeekForecast from "@/api/weatherAPI";
 import { LocationType } from "@/lib/weatherData";

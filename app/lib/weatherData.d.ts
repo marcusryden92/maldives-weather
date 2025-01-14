@@ -6,6 +6,8 @@ export type WeatherData = {
   temperatureMin?: number; // Min temperature, as a number
   uvIndex?: number; // Max UV index, a number
   windSpeedMax?: number; // Max wind speed, a number
+  precipitationSum?: number;
+  precipitationProbabilityMax?: number;
 };
 
 export type WeatherDataArray = WeatherData[];
@@ -24,16 +26,29 @@ export type CurrentWeatherData = {
   isDay: number; // Assuming `weatherData.current.isDay` is a number (e.g., 1 for day, 0 for night)
 };
 
-export type HourlyWeatherData = {
+export interface HourlyWeatherData {
   time: string;
   temperature: number;
   weatherCode: number;
-};
+  precipitationProbability: number;
+  precipitation: number;
+  cloudCover: number;
+  windSpeed10m: number;
+}
 
 export type WeatherDataObject = {
   currentWeather: CurrentWeather;
   hourlyForecast: HourlyWeatherData[][];
   forecast: WeatherDataArray;
+};
+
+export type WeatherIconObject = {
+  time: string;
+  weatherCode: number;
+  precipitationProbability: number;
+  precipitation: number;
+  cloudCover: number;
+  windSpeed10m: number;
 };
 
 export type LocationType = "male" | "addu" | "maafushi" | "fuvahmulah";

@@ -1,7 +1,7 @@
 import { HourlyWeatherData } from "@/lib/weatherData";
 
 import { formatHourString } from "@/utils/formatting";
-import { getWeatherCode, getWeatherIcon } from "@/utils/weatherHelpers";
+import { getWeatherCode, getWeatherIcon } from "@/utils/weatherIconHandlers";
 
 import Image from "next/image";
 
@@ -16,7 +16,6 @@ export const HourlyWeather = ({
   backgroundImage,
   hourlyData,
 }: HourlyWeatherProps) => {
-  console.log(hourlyData);
   return (
     <div className="space-y-6">
       <div
@@ -36,23 +35,17 @@ export const HourlyWeather = ({
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {hourlyData.map((hour) => (
           <div
-            key={hour.time}
+            key={hour.time as string}
             className="p-4 rounded-lg bg-primary/30 backdrop-blur-sm hover:bg-primary/40 transition-colors duration-300"
           >
             <div className="flex items-center justify-between">
               <span className="text-lg font-medium">
-                {formatHourString(hour.time)}
+                {formatHourString(hour.time as string)}
               </span>
               {}
               <Image
-                src={`/weather-icons/${getWeatherIcon(
-                  Number(hour.weatherCode),
-                  hour.time
-                )}`}
-                alt={
-                  getWeatherCode(Number(hour.weatherCode))?.description ||
-                  "Weather icon"
-                }
+                src={`/weather-icons/${getWeatherIcon(hour)}`}
+                alt={"Weather icon"}
                 width={50}
                 height={50}
                 priority={true}
@@ -63,7 +56,7 @@ export const HourlyWeather = ({
                 {hour.temperature}&deg;C
               </span>
               <p className="text-sm text-muted-foreground mt-1">
-                {getWeatherCode(Number(hour.weatherCode))?.description}
+                {getWeatherCode(hour)?.description}
               </p>
             </div>
           </div>

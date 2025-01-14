@@ -177,20 +177,20 @@ const weatherIcons = [
   {
     code: 29,
     description: "Light thunderstorm",
-    icon_day: "wi-day-thunderstorm.svg",
-    icon_night: "wi-night-thunderstorm.svg",
-  },
-  {
-    code: 30,
-    description: "Moderate thunderstorm",
     icon_day: "wi-day-lightning.svg",
     icon_night: "wi-night-lightning.svg",
   },
   {
-    code: 31,
-    description: "Heavy thunderstorm",
+    code: 30,
+    description: "Moderate thunderstorm",
     icon_day: "wi-day-storm-showers.svg",
     icon_night: "wi-night-storm-showers.svg",
+  },
+  {
+    code: 31,
+    description: "Heavy thunderstorm",
+    icon_day: "wi-day-thunderstorm.svg",
+    icon_night: "wi-night-thunderstorm.svg",
   },
   {
     code: 32,
@@ -280,8 +280,8 @@ const weatherIcons = [
   {
     code: 46,
     description: "Severe thunderstorm",
-    icon_day: "wi-day-storm-showers.svg",
-    icon_night: "wi-night-storm-showers.svg",
+    icon_day: "wi-day-thunderstorm.svg",
+    icon_night: "wi-night-thunderstorm.svg",
   },
   {
     code: 47,
@@ -341,19 +341,19 @@ const weatherIcons = [
     code: 56,
     description: "High winds (gusts)",
     icon_day: "wi-day-cloudy-gusts.svg",
-    icon_night: "wi-night-cloudy-gusts.svg",
+    icon_night: "wi-night-alt-cloudy-gusts.svg",
   },
   {
     code: 57,
     description: "Squall or gust front",
     icon_day: "wi-day-cloudy-gusts.svg",
-    icon_night: "wi-night-cloudy-gusts.svg",
+    icon_night: "wi-night-alt-cloudy-gusts.svg",
   },
   {
     code: 58,
     description: "Wind shear",
     icon_day: "wi-day-cloudy-gusts.svg",
-    icon_night: "wi-night-cloudy-gusts.svg",
+    icon_night: "wi-night-alt-cloudy-gusts.svg",
   },
   {
     code: 59,

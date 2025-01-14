@@ -9,10 +9,11 @@ import {
   getCoordinatesForLocation,
   fetchWeatherData,
   fetchHistoricalDataHelper,
-  processWeatherData,
   processHistoricalWeatherData,
   getMonthDateRangeWithFullWeeks,
 } from "@/utils/weatherHelpers";
+
+import { processWeatherData } from "@/utils/weatherProcessing";
 
 // Custom Error Class
 export class WeatherAPIError extends Error {
@@ -30,13 +31,23 @@ export default async function fetchTwoWeekForecast(
   const params = {
     latitude: coordinates.latitude,
     longitude: coordinates.longitude,
-    hourly: ["temperature_2m", "weather_code"],
+    hourly: [
+      "temperature_2m",
+      "weather_code",
+      "precipitation_probability",
+      "precipitation",
+      "cloud_cover",
+      "wind_speed_10m",
+      "visibility",
+    ],
     current: [
       "temperature_2m",
       "relative_humidity_2m",
       "is_day",
       "weather_code",
       "wind_speed_10m",
+      "precipitation",
+      "cloud_cover",
     ],
     daily: [
       "weather_code",
@@ -44,6 +55,8 @@ export default async function fetchTwoWeekForecast(
       "temperature_2m_min",
       "uv_index_max",
       "wind_speed_10m_max",
+      "precipitation_sum",
+      "precipitation_probability_max",
     ],
     timezone: "auto",
     forecast_days: 14,
@@ -83,6 +96,9 @@ export default async function fetchTwoWeekForecast(
     daily,
     utcOffsetSeconds
   );
+
+  console.log(weatherData);
+
   return weatherData;
 }
 
