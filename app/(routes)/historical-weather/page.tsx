@@ -19,7 +19,7 @@ import {
   getCurrentMonth,
   convertDateFormat,
 } from "@/utils/formatting";
-import { getWeatherCode } from "@/utils/weatherIconHandlers";
+// import { getWeatherCode } from "@/utils/weatherIconHandlers";
 import HistoricalSkeleton from "./HistoricalSkeleton";
 
 const Forecast = () => {
