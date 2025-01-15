@@ -49,13 +49,13 @@ function getCustomWeatherCode(weatherObject: WeatherIconObject) {
   if (windSpeed10m > 50) {
     return weatherIcons[53];
   }
+  if (windSpeed10m > 40) return weatherIcons[52];
 
   if (cloudCover > 95) return weatherIcons[4];
   else if (cloudCover > 80) return weatherIcons[3];
   else if (cloudCover > 50) return weatherIcons[2];
   else if (cloudCover > 30) return weatherIcons[1];
 
-  if (windSpeed10m > 40) return weatherIcons[52];
   if (windSpeed10m > 30) return weatherIcons[51];
 
   if (windSpeed10m > 10) {
