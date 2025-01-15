@@ -26,8 +26,16 @@ export async function fetchHistoricalData(
     timezone: "auto",
     start_date: dateRange.startDate,
     end_date: dateRange.endDate,
-    daily: ["weather_code", "temperature_2m_max"],
+    hourly: "cloud_cover",
+    daily: [
+      "weather_code",
+      "temperature_2m_max",
+      "precipitation_sum",
+      "wind_speed_10m_max",
+    ],
   };
+
+  //  precipitation, cloudCover, windSpeed10m
 
   const url = "https://historical-forecast-api.open-meteo.com/v1/forecast";
   const responses = await fetchHistoricalDataHelper(url, params);
@@ -39,6 +47,7 @@ export async function fetchHistoricalData(
   const utcOffsetSeconds = response.utcOffsetSeconds();
 
   const daily = response.daily() as VariablesWithTime | null;
+  const hourly = response.hourly() as VariablesWithTime | null;
 
   if (!daily) {
     throw new WeatherAPIError(
@@ -48,7 +57,11 @@ export async function fetchHistoricalData(
   }
 
   // Process Weather Data
-  const weatherData = processHistoricalWeatherData(daily, utcOffsetSeconds);
+  const weatherData = processHistoricalWeatherData(
+    daily,
+    hourly,
+    utcOffsetSeconds
+  );
 
   return weatherData;
 }

@@ -1,4 +1,4 @@
-import { LocationType, WeatherDataArray } from "@/lib/weatherData";
+import { LocationType } from "@/lib/weatherData";
 import { fetchWeatherApi } from "openmeteo";
 import { VariablesWithTime } from "@/lib/weatherData";
 
