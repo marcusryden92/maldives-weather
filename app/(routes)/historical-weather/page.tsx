@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { LocationType, WeatherData } from "@/lib/weatherData";
 import fetchHistoricalDataAction from "@/actions/fetchHistoricalData";
 import Header from "@/components/Header";
-import Image from "next/image";
+// import Image from "next/image";
 
 import {
   Select,
