@@ -1,7 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { LocationType, WeatherData } from "@/lib/weatherData";
+import {
+  LocationType,
+  WeatherData,
+  WeatherIconObject,
+} from "@/lib/weatherData";
 import fetchHistoricalDataAction from "@/actions/fetchHistoricalData";
 import Header from "@/components/Header";
 // import Image from "next/image";
@@ -19,7 +23,7 @@ import {
   getCurrentMonth,
   convertDateFormat,
 } from "@/utils/formatting";
-// import { getWeatherCode } from "@/utils/weatherIconHandlers";
+import { getWeatherCode } from "@/utils/weatherIconHandlers";
 import HistoricalSkeleton from "./HistoricalSkeleton";
 
 const Forecast = () => {
@@ -201,6 +205,15 @@ const Forecast = () => {
                 <HistoricalSkeleton />
               ) : (
                 weatherDataObject?.historicalData.map((date) => {
+                  const iconObject: WeatherIconObject = {
+                    time: date.time,
+                    weatherCode: date.weatherCode,
+                    precipitationProbability: 100,
+                    precipitation: date.precipitationSum || 0,
+                    cloudCover: date.averageCloudCover || 0,
+                    windSpeed10m: date.windSpeedMax || 0,
+                  };
+
                   return (
                     <div
                       key={date.time}
@@ -224,11 +237,11 @@ const Forecast = () => {
                         </span>
                         {/* <Image
                           src={`/weather-icons/${
-                            getWeatherCode(Number(date.weatherCode))?.icon_day
+                            getWeatherCode(iconObject)?.icon_day
                           }`}
                           alt={
-                            getWeatherCode(Number(date.weatherCode))
-                              ?.description || "Weather icon"
+                            getWeatherCode(iconObject)?.description ||
+                            "Weather icon"
                           }
                           width={50}
                           height={50}
@@ -247,10 +260,7 @@ const Forecast = () => {
                           {date.temperatureMax}&deg;C
                         </span>
                         <p className="flex-1 text-xs mt-2">
-                          {/* {
-                            getWeatherCode(Number(date.weatherCode))
-                              ?.description
-                          } */}
+                          {getWeatherCode(iconObject)?.description}
                         </p>
                       </div>
                     </div>

@@ -1,6 +1,6 @@
 "use server";
 
-import { fetchHistoricalData } from "@/api/weatherAPI";
+import { fetchHistoricalData } from "@/api/historicalWeatherAPI";
 import { LocationType } from "@/lib/weatherData";
 
 export default async function fetchHistoricalDataAction(

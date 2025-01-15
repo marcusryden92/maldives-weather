@@ -9,7 +9,8 @@ function returnDefaultWeatherCode(code: number) {
     code === 80 ||
     code === 85 ||
     code === 95 ||
-    code === 61
+    code === 61 ||
+    code === 3
   )
     return false;
 
@@ -45,6 +46,11 @@ function getCustomWeatherCode(weatherObject: WeatherIconObject) {
     else return weatherIcons[26];
   }
 
+  if (cloudCover > 95) return weatherIcons[4];
+  else if (cloudCover > 80) return weatherIcons[3];
+  else if (cloudCover > 50) return weatherIcons[2];
+  else if (cloudCover > 30) return weatherIcons[1];
+
   if (windSpeed10m > 10) {
     if (windSpeed10m > 50) {
       return weatherIcons[53];
@@ -52,11 +58,5 @@ function getCustomWeatherCode(weatherObject: WeatherIconObject) {
     else if (windSpeed10m > 30) return weatherIcons[51];
 
     return weatherIcons[50];
-  }
-
-  if (cloudCover > 95) return weatherIcons[4];
-  else if (cloudCover > 80) return weatherIcons[3];
-  else if (cloudCover > 50) return weatherIcons[2];
-  else if (cloudCover > 30) return weatherIcons[1];
-  else return weatherIcons[0];
+  } else return weatherIcons[0];
 }
