@@ -9,7 +9,7 @@ export type WeatherData = {
   windSpeedMax?: number; // Max wind speed
   precipitationSum?: number; // Total precipitation
   precipitationProbabilityMax?: number; // Max precipitation probability
-  averageCloudCover?: number; // Average cloud cover for the day
+  averageCloudCover?: number | null; // Average cloud cover for the day
 };
 
 export type WeatherDataArray = WeatherData[];

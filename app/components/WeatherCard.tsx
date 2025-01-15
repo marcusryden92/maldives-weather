@@ -28,9 +28,10 @@ interface WeatherCardProps {
   index: number;
   hourlyData: HourlyWeatherData[];
   mainCard?: boolean;
-  precipitationSum?: number;
-  precipitationProbabilityMax?: number;
-  windSpeedMax?: number;
+  precipitationSum: number;
+  precipitationProbabilityMax: number;
+  windSpeedMax: number;
+  cloudCover: number;
 }
 
 const backgroundImages = [
@@ -55,9 +56,10 @@ export const WeatherCard = ({
   index,
   hourlyData,
   mainCard,
-  precipitationSum = 0,
-  precipitationProbabilityMax = 0,
-  windSpeedMax = 0,
+  precipitationSum,
+  precipitationProbabilityMax,
+  windSpeedMax,
+  cloudCover,
 }: WeatherCardProps) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const imageIndex = (index % (backgroundImages.length - 1)) + 1;
@@ -68,8 +70,8 @@ export const WeatherCard = ({
         time: time,
         weatherCode: weatherCode,
         precipitationProbability: precipitationProbabilityMax,
-        precipitation: precipitationSum / 20,
-        cloudCover: 0,
+        precipitation: precipitationSum / 18,
+        cloudCover: cloudCover,
         windSpeed10m: windSpeedMax,
       })
     ) || "";

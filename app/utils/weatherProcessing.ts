@@ -150,6 +150,7 @@ export const processHourlyWeather = (
 
 export const processDailyWeather = (
   daily: VariablesWithTime,
+  hourly: VariablesWithTime,
   utcOffsetSeconds: number
 ): DailyForecast => {
   const dailyTime =
@@ -168,9 +169,42 @@ export const processDailyWeather = (
     temperature2mMin: getDailyVariable(daily, 2),
     uvIndexMax: getDailyVariable(daily, 3),
     windSpeed10mMax: getDailyVariable(daily, 4),
-    precipitationSum: getDailyVariable(daily, 5), // Added
-    precipitationProbabilityMax: getDailyVariable(daily, 6), // Added
+    precipitationSum: getDailyVariable(daily, 5),
+    precipitationProbabilityMax: getDailyVariable(daily, 6),
   };
+
+  const dailyCloudCoverAvg = dailyTime.map((date) => {
+    if (!hourly || !hourly.time || !hourly.interval || !hourly.timeEnd) {
+      return null; // Return null if hourly data is not available
+    }
+
+    const startOfDay = date.getTime() / 1000 - utcOffsetSeconds;
+    const endOfDay = startOfDay + 24 * 60 * 60;
+
+    const hourlyTime = range(
+      Number(hourly.time()),
+      Number(hourly.timeEnd()),
+      hourly.interval()
+    );
+
+    const hourlyCloudCover = getHourlyVariable(hourly, 4); // Assuming cloud cover is at index 4
+
+    // Filter hourly data for the current day
+    const dailyCloudCoverValues = hourlyTime
+      .map((time, i) =>
+        time >= startOfDay && time < endOfDay ? hourlyCloudCover[i] : null
+      )
+      .filter((value) => value !== null) as number[];
+
+    // Calculate the average cloud cover
+    const avgCloudCover =
+      dailyCloudCoverValues.length > 0
+        ? dailyCloudCoverValues.reduce((sum, val) => sum + val, 0) /
+          dailyCloudCoverValues.length
+        : null;
+
+    return avgCloudCover !== null ? Number(avgCloudCover.toFixed(2)) : null;
+  });
 
   const weatherArray: DailyForecast = dailyData.time.map((time, i) => ({
     time: time.toISOString(),
@@ -180,14 +214,14 @@ export const processDailyWeather = (
     temperatureMin: dailyData.temperature2mMin[i],
     uvIndex: Number(dailyData.uvIndexMax[i].toFixed(1)),
     windSpeedMax: dailyData.windSpeed10mMax[i],
-    precipitationSum: dailyData.precipitationSum[i], // Added
-    precipitationProbabilityMax: dailyData.precipitationProbabilityMax[i], // Added
+    precipitationSum: dailyData.precipitationSum[i],
+    precipitationProbabilityMax: dailyData.precipitationProbabilityMax[i],
+    averageCloudCover: dailyCloudCoverAvg[i], // Add the daily average cloud cover
   }));
 
   return weatherArray;
 };
 
-// Main Function
 export const processWeatherData = (
   current: VariablesWithTime,
   hourly: VariablesWithTime,
@@ -197,6 +231,6 @@ export const processWeatherData = (
   return {
     currentWeather: processCurrentWeather(current, utcOffsetSeconds),
     hourlyForecast: processHourlyWeather(hourly, utcOffsetSeconds),
-    forecast: processDailyWeather(daily, utcOffsetSeconds),
+    forecast: processDailyWeather(daily, hourly, utcOffsetSeconds), // Pass hourly data here
   };
 };
