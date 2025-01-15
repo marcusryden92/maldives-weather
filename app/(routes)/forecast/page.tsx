@@ -116,10 +116,24 @@ const Forecast = () => {
                       day="Today"
                       time={weatherDataObject.forecast[0].time}
                       temperature={weatherDataObject.forecast[0].temperatureMax}
+                      precipitationSum={
+                        weatherDataObject.forecast[0].precipitationSum || 0
+                      }
+                      precipitationProbabilityMax={
+                        weatherDataObject.forecast[0]
+                          .precipitationProbabilityMax || 0
+                      }
+                      windSpeedMax={
+                        weatherDataObject.forecast[0].windSpeedMax || 0
+                      }
+                      cloudCover={
+                        weatherDataObject.forecast[0].averageCloudCover || 0
+                      }
                       weatherCode={weatherDataObject.forecast[0].weatherCode}
                       hourlyData={weatherDataObject.hourlyForecast[0]}
                       className="transform hover:scale-105 transition-all duration-300"
                       index={1}
+                      mainCard
                     />
                   ) : (
                     <WeatherCardSkeleton />
@@ -141,7 +155,7 @@ const Forecast = () => {
                 </h2>
               </div>
 
-              <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-7xl mx-auto">
+              <div className="w-full grid grid-cols-2 lg:grid-cols-5 gap-6 max-w-7xl mx-auto">
                 {visibleForecast && weatherDataObject ? (
                   visibleForecast.map((day: WeatherData, index: number) => (
                     <WeatherCard
@@ -150,6 +164,12 @@ const Forecast = () => {
                       time={weatherDataObject.forecast[index].time}
                       temperature={day.temperatureMax}
                       weatherCode={day.weatherCode}
+                      precipitationSum={day.precipitationSum || 0}
+                      precipitationProbabilityMax={
+                        day.precipitationProbabilityMax || 0
+                      }
+                      windSpeedMax={day.windSpeedMax || 0}
+                      cloudCover={day.averageCloudCover || 0}
                       hourlyData={weatherDataObject.hourlyForecast[index]}
                       className="transform hover:scale-105 transition-all duration-300"
                       index={index + 1}
