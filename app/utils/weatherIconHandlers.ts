@@ -1,5 +1,5 @@
 import weatherIcons from "@/lib/weather-icons";
-import { HourlyWeatherData, WeatherIconObject } from "@/lib/weatherData";
+import { WeatherIconObject } from "@/lib/weatherData";
 
 export function weatherIconHandler() {}
 
