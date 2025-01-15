@@ -19,8 +19,7 @@ import {
   getCurrentMonth,
   convertDateFormat,
 } from "@/utils/formatting";
-import { getWeatherCode } from "@/utils/weatherHelpers";
-
+import { getWeatherCode } from "@/utils/weatherIconHandlers";
 import HistoricalSkeleton from "./HistoricalSkeleton";
 
 const Forecast = () => {
@@ -223,7 +222,7 @@ const Forecast = () => {
                         <span className="text-lg font-medium">
                           {convertDateFormat(date.time)}
                         </span>
-                        <Image
+                        {/* <Image
                           src={`/weather-icons/${
                             getWeatherCode(Number(date.weatherCode))?.icon_day
                           }`}
@@ -234,7 +233,7 @@ const Forecast = () => {
                           width={50}
                           height={50}
                           priority={true}
-                        />
+                        /> */}
                       </div>
                       <div
                         className={`flex flex-col flex-1 mt-2 ${
@@ -248,10 +247,10 @@ const Forecast = () => {
                           {date.temperatureMax}&deg;C
                         </span>
                         <p className="flex-1 text-xs mt-2">
-                          {
+                          {/* {
                             getWeatherCode(Number(date.weatherCode))
                               ?.description
-                          }
+                          } */}
                         </p>
                       </div>
                     </div>
