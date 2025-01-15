@@ -7,8 +7,9 @@ export type WeatherData = {
   temperatureMin?: number; // Min temperature
   uvIndex?: number; // Max UV index
   windSpeedMax?: number; // Max wind speed
-  precipitationSum?: number;
-  precipitationProbabilityMax?: number;
+  precipitationSum?: number; // Total precipitation
+  precipitationProbabilityMax?: number; // Max precipitation probability
+  averageCloudCover?: number; // Average cloud cover for the day
 };
 
 export type WeatherDataArray = WeatherData[];
@@ -72,11 +73,3 @@ export type VariablesWithTime = {
   timeEnd?: () => number; // Optional: If used in daily
   interval?: () => number; // Optional: If used in daily
 };
-
-// Custom Error Class
-export class WeatherAPIError extends Error {
-  constructor(message: string, public readonly code?: string) {
-    super(message);
-    this.name = "WeatherAPIError";
-  }
-}

@@ -2,13 +2,7 @@ import { LocationType } from "@/lib/weatherData";
 import { fetchWeatherApi } from "openmeteo";
 import { VariablesWithTime } from "@/lib/weatherData";
 
-// Custom Error Class
-export class WeatherAPIError extends Error {
-  constructor(message: string, public readonly code?: string) {
-    super(message);
-    this.name = "WeatherAPIError";
-  }
-}
+import { WeatherAPIError } from "@/lib/errors";
 
 type Params = {
   latitude: number;

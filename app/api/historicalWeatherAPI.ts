@@ -2,8 +2,9 @@ import {
   LocationType,
   VariablesWithTime,
   WeatherData,
-  WeatherAPIError,
 } from "@/lib/weatherData";
+import { WeatherAPIError } from "@/lib/errors";
+
 import {
   getCoordinatesForLocation,
   getMonthDateRangeWithFullWeeks,
@@ -34,8 +35,6 @@ export async function fetchHistoricalData(
       "wind_speed_10m_max",
     ],
   };
-
-  //  precipitation, cloudCover, windSpeed10m
 
   const url = "https://historical-forecast-api.open-meteo.com/v1/forecast";
   const responses = await fetchHistoricalDataHelper(url, params);

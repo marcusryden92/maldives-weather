@@ -1,9 +1,10 @@
 import {
+  VariablesWithTime,
   WeatherDataObject,
   LocationType,
-  WeatherAPIError,
 } from "@/lib/weatherData";
-import { VariablesWithTime } from "@/lib/weatherData";
+
+import { WeatherAPIError } from "@/lib/errors";
 
 import {
   getCoordinatesForLocation,
