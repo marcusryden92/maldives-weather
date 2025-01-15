@@ -152,14 +152,17 @@ const Index = () => {
                           weatherDataObject.forecast[0].temperatureMax
                         }
                         precipitationSum={
-                          weatherDataObject.forecast[0].precipitationSum
+                          weatherDataObject.forecast[0].precipitationSum || 0
                         }
                         precipitationProbabilityMax={
                           weatherDataObject.forecast[0]
-                            .precipitationProbabilityMax
+                            .precipitationProbabilityMax || 0
                         }
                         windSpeedMax={
-                          weatherDataObject.forecast[0].windSpeedMax
+                          weatherDataObject.forecast[0].windSpeedMax || 0
+                        }
+                        cloudCover={
+                          weatherDataObject.forecast[0].averageCloudCover || 0
                         }
                         weatherCode={weatherDataObject.forecast[0].weatherCode}
                         hourlyData={weatherDataObject.hourlyForecast[0]}
@@ -213,11 +216,12 @@ const Index = () => {
                       time={weatherDataObject.forecast[index].time}
                       temperature={day.temperatureMax}
                       weatherCode={day.weatherCode}
-                      precipitationSum={day.precipitationSum}
+                      precipitationSum={day.precipitationSum || 0}
                       precipitationProbabilityMax={
-                        day.precipitationProbabilityMax
+                        day.precipitationProbabilityMax || 0
                       }
-                      windSpeedMax={day.windSpeedMax}
+                      cloudCover={day.averageCloudCover || 0}
+                      windSpeedMax={day.windSpeedMax || 0}
                       hourlyData={weatherDataObject.hourlyForecast[index]}
                       className="transform hover:scale-105 transition-all duration-300"
                       index={index + 1}

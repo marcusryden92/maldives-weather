@@ -8,7 +8,7 @@ import {
 } from "@/lib/weatherData";
 import fetchHistoricalDataAction from "@/actions/fetchHistoricalData";
 import Header from "@/components/Header";
-// import Image from "next/image";
+import Image from "next/image";
 
 import {
   Select,
@@ -235,7 +235,7 @@ const Forecast = () => {
                         <span className="text-lg font-medium">
                           {convertDateFormat(date.time)}
                         </span>
-                        {/* <Image
+                        <Image
                           src={`/weather-icons/${
                             getWeatherCode(iconObject)?.icon_day
                           }`}
@@ -246,7 +246,7 @@ const Forecast = () => {
                           width={50}
                           height={50}
                           priority={true}
-                        /> */}
+                        />
                       </div>
                       <div
                         className={`flex flex-col flex-1 mt-2 ${
