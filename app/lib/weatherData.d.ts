@@ -51,6 +51,15 @@ export type WeatherIconObject = {
   windSpeed10m: number;
 };
 
+export type HistoricalWeatherObject = {
+  time: string;
+  temperatureMax: number;
+  weatherCode: number;
+  precipitationSum: number;
+  cloudCover: number;
+  windSpeedMax: number;
+};
+
 export type LocationType = "male" | "addu" | "maafushi" | "fuvahmulah";
 
 export type VariableWithValues = {

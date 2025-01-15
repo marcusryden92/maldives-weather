@@ -1,7 +1,7 @@
 import {
   WeatherDataObject,
   LocationType,
-  WeatherData,
+  HistoricalWeatherObject,
 } from "@/lib/weatherData";
 import { VariablesWithTime } from "@/lib/weatherData";
 
@@ -9,9 +9,10 @@ import {
   getCoordinatesForLocation,
   fetchWeatherData,
   fetchHistoricalDataHelper,
-  processHistoricalWeatherData,
   getMonthDateRangeWithFullWeeks,
 } from "@/utils/weatherHelpers";
+
+import { processHistoricalWeatherData } from "@/utils/historicalWeatherProcessing";
 
 import { processWeatherData } from "@/utils/weatherProcessing";
 
@@ -106,7 +107,7 @@ export async function fetchHistoricalData(
   location: LocationType,
   year: number,
   month: number
-): Promise<{ historicalData: WeatherData[] } | null> {
+): Promise<{ historicalData: HistoricalWeatherObject[] } | null> {
   const coordinates = getCoordinatesForLocation(location);
   const dateRange = getMonthDateRangeWithFullWeeks(year, month);
 
@@ -116,11 +117,18 @@ export async function fetchHistoricalData(
     timezone: "auto",
     start_date: dateRange.startDate,
     end_date: dateRange.endDate,
-    daily: ["weather_code", "temperature_2m_max"],
+    hourly: ["cloud_cover"], // Request hourly cloud_cover data
+    daily: [
+      "weather_code",
+      "temperature_2m_max",
+      "precipitation_sum",
+      "wind_speed_10m_max",
+    ],
   };
 
   const url = "https://historical-forecast-api.open-meteo.com/v1/forecast";
   const responses = await fetchHistoricalDataHelper(url, params);
+
   if (!responses || responses.length === 0) {
     throw new WeatherAPIError("No weather data received", "NO_DATA");
   }
@@ -129,16 +137,21 @@ export async function fetchHistoricalData(
   const utcOffsetSeconds = response.utcOffsetSeconds();
 
   const daily = response.daily() as VariablesWithTime | null;
+  const hourly = response.hourly() as VariablesWithTime | null; // Assuming this is how you access the hourly data
 
-  if (!daily) {
+  if (!daily || !hourly) {
     throw new WeatherAPIError(
       "Incomplete weather data received",
       "INCOMPLETE_DATA"
     );
   }
 
-  // Process Weather Data
-  const weatherData = processHistoricalWeatherData(daily, utcOffsetSeconds);
+  // Process the data, including calculating daily cloud cover averages
+  const weatherData = processHistoricalWeatherData(
+    daily,
+    hourly,
+    utcOffsetSeconds
+  );
 
   return weatherData;
 }
