@@ -27,7 +27,7 @@ const weatherIcons = [
     code: 4,
     description: "Overcast",
     icon_day: "wi-cloud.svg",
-    icon_night: "wi-night-cloudy.svg",
+    icon_night: "wi-cloud.svg",
   },
   {
     code: 5,
