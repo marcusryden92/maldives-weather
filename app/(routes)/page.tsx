@@ -75,11 +75,11 @@ const Index = () => {
           value: `${weatherDataObject.currentWeather.humidity.toString()}%`,
           icon: "droplets",
         },
-        {
+        /*  {
           label: "Wind Speed",
           value: `${weatherDataObject.currentWeather.windSpeed.toString()} km/h`,
           icon: "wind",
-        },
+        }, */
         {
           label: "UV Index",
           value: weatherDataObject?.forecast?.[0]?.uvIndex?.toString() || "N/A",
@@ -242,14 +242,14 @@ const Index = () => {
               <ResortCard resort={resort} currentMonth={currentMonth} />
             </div>
 
-            {/* News Section */}
-            <NewsSection limit={4} />
-
             {/* Activities Section */}
             <ActivitiesSection />
 
             {/* Add the new RecommendedResorts section */}
             <RecommendedResorts />
+
+            {/* News Section */}
+            <NewsSection limit={4} />
           </div>
         </div>
       </div>

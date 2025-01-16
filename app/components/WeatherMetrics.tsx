@@ -30,11 +30,11 @@ const getMetricIcon = (label: string) => {
 
 export const WeatherMetrics = ({ metrics }: { metrics: MetricProps[] }) => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 w-full animate-fade-up">
+    <div className="grid grid-cols-2 gap-6 w-full animate-fade-up">
       {metrics.map((metric, index) => (
         <Card
           key={index}
-          className="p-6 bg-white/80 border-none shadow-md hover:shadow-xl transition-all duration-300 flex items-center space-x-4"
+          className="p-6 bg-white/80 border-none shadow-md hover:shadow-xl transition-all duration-300 flex items-center justify-center space-x-4"
         >
           <div className="w-[10vw] h-[10vw] md:w-[3vw] md:h-[3vw] rounded-full bg-primary/50 flex items-center justify-center">
             {getMetricIcon(metric.label)}
