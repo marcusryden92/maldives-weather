@@ -52,10 +52,12 @@ export default async function Article({ params }: { params: Params }) {
         {/* Display article title */}
         <h1 className="flex flex-col justify-between text-3xl font-semibold text-gray-900 mb-4 gap-4">
           <span>{title}</span>{" "}
-          <Link href={url}>
-            <Button variant={"outline"} className="text-xl">
-              Read the full article
-            </Button>
+          <Link href={url} passHref>
+            <a rel="nofollow">
+              <Button variant={"outline"} className="text-xl">
+                Read the full article
+              </Button>
+            </a>
           </Link>
         </h1>
 
